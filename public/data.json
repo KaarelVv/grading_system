@@ -1,0 +1,25 @@
+{
+    "teams": [
+      {
+        "id": 1,
+        "name": "Team Alpha",
+        "points": 0,
+        "subcategories": {
+          "speed": 0,
+          "accuracy": 0,
+          "creativity": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "Team Beta",
+        "points": 0,
+        "subcategories": {
+          "speed": 0,
+          "accuracy": 0,
+          "creativity": 0
+        }
+      }
+    ]
+  }
+  
