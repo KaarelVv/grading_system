@@ -1,14 +1,16 @@
 import './styles/App.css'
 import Home from "./pages/Home";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import GradingPage from './pages/Grading';
+import Grading from './pages/Grading';
+import UpdatePointsForm from './pages/Grading';
+import ScoreTable from './pages/Grading';
 
 
 
 function App() {
   return (
     <>
-      <GradingPage></GradingPage>
+      <ScoreTable></ScoreTable>
       </>
       );
 }
