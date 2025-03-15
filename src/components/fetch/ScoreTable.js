@@ -5,7 +5,7 @@ import ScoreRow from "../UI/ScoreRow";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const scriptUrl = "https://script.google.com/macros/s/AKfycbwmLxQv3MBOSyN5EBc4hZnQ_nhEx-scUc3WY-e0Xa2xY-DoT45D2wKoce_N9VjElzD8CA/exec";
+const scriptUrl = "https://script.google.com/macros/s/AKfycbw4ZcBA3uhGGOMq8AJRNdUSzcw6h5FuQ9Y9MLte5SDl2W6pukGLANMRa8BIVn2f65lOTg/exec";
 
 const ScoreTable = () => {
   const { teams, setTeams, loading } = useFetchTeams();
