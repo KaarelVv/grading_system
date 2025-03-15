@@ -1,16 +1,17 @@
+import Grading from './components/pages/Grading';
 import './styles/App.css'
-import Home from "./pages/Home";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 
 function App() {
   return (
-    <div>
-      <Home>
-      </Home>
-    </div>
-
-
-  );
+    <>
+      <Grading></Grading>
+      </>
+      );
 }
 
 export default App;
