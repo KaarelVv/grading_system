@@ -1,4 +1,4 @@
-import Grading from './components/pages/Grading';
+import Home from './components/pages/Home';
 import './styles/App.css'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <>
-      <Grading></Grading>
+      <Home></Home>
       </>
       );
 }
