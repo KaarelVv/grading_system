@@ -1,7 +1,7 @@
 
 .Home {
     background: linear-gradient(
-        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 34, 0.5),
         rgba(0, 0, 0, 0.5)
       ),url('./background.jpeg');
     background-size: cover;
@@ -70,7 +70,7 @@
   }
   
   .button:hover {
-    background-color: #0056b3;
+    background-color: #000022;
   }
 
   .tekst1 {
