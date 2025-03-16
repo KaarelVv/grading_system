@@ -73,13 +73,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 https://react-bootstrap.netlify.app/docs/getting-started/why-react-bootstrap
 
 ### GS backend
- `function doGet(e) {
-  const sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1Yf36ymF2PFH5DRWZP4sxBQaQDjMKynmax-Edmo2ntpA/edit?gid=0#gid=0").getSheetByName("Sheet1");
+`
+    
+    function doGet(e) {
+    
+    const sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1Yf36ymF2PFH5DRWZP4sxBQaQDjMKynmax-Edmo2ntpA/edit?gid=0#gid=0").getSheetByName("Sheet1");
 
-  // If no parameters are provided, return all team data
-  if (!e || !e.parameter || Object.keys(e.parameter).length === 0) {
-    let data = sheet.getDataRange().getValues();
-    data.shift(); // Remove headers
+    // If no parameters are provided, return all team data
+    if (!e || !e.parameter || Object.keys(e.parameter).length === 0) {
+      let data = sheet.getDataRange().getValues();
+      data.shift(); // Remove headers
 
     let result = data.map(row => ({
       Team: row[0],
@@ -105,8 +108,9 @@ https://react-bootstrap.netlify.app/docs/getting-started/why-react-bootstrap
       .setMimeType(ContentService.MimeType.JSON);
   }
 
-  // If "update=true" is in the URL, process the update request
-  if (e.parameter.update) {
+  
+    // If "update=true" is in the URL, process the update request
+    if (e.parameter.update) {
     let team = e.parameter.Team;
 
     let catA1 = parseInt(e.parameter.CategoryA1, 10);
@@ -170,7 +174,9 @@ https://react-bootstrap.netlify.app/docs/getting-started/why-react-bootstrap
       .setMimeType(ContentService.MimeType.TEXT);
   }
 
-  return ContentService.createTextOutput("Invalid request")
+    return ContentService.createTextOutput("Invalid request")
     .setMimeType(ContentService.MimeType.TEXT);
 }
+
+
 `
