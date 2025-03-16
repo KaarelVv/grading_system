@@ -172,11 +172,11 @@ https://react-bootstrap.netlify.app/docs/getting-started/why-react-bootstrap
 
     return ContentService.createTextOutput("Team not found")
       .setMimeType(ContentService.MimeType.TEXT);
-  }
+    }
 
     return ContentService.createTextOutput("Invalid request")
     .setMimeType(ContentService.MimeType.TEXT);
-}
+    }
 
 
 `
