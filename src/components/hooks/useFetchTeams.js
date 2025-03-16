@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const scriptUrl = "https://script.google.com/macros/s/AKfycbwmLxQv3MBOSyN5EBc4hZnQ_nhEx-scUc3WY-e0Xa2xY-DoT45D2wKoce_N9VjElzD8CA/exec";
+const scriptUrl = "https://script.google.com/macros/s/AKfycby_vk5mcIuqKLz5g6fdYHgDHWaqTzcEG47HBKkLW3AO8np_MgByjS3Rt_Kmo0Vn7TcD/exec";
 
 const useFetchTeams = () => {
   const [teams, setTeams] = useState([]);
