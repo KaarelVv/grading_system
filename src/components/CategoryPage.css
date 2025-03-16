@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
+
+.category-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: #000022;
+  color: white;
+  font-family: 'Mulish', sans-serif;
+  padding: 20px;
+}
+
+.assessor-info {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.meeskonna-nimi {
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.team-name {
+  font-size: 24px;
+  margin-top: 10px;
+  color: #DE3C4B;
+  text-align: center;
+}
+
+/* Dot navigation styles */
+.dot-navigation {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #555;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: #fff;
+}
+
+.criteria-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.criteria-section {
+  background-color: rgba(0, 0, 34, 0.7);
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+}
+
+.criteria-section h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: white;
+  font-weight: 700;
+}
+
+.criteria-section p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #ccc;
+  font-weight: 400;
+}
+
+.score-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.score-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Mulish', sans-serif;
+}
+
+.score-button.minus {
+  background-color: #666;
+}
+
+.score-button.plus {
+  background-color: #DE3C4B;
+}
+
+.score-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.score-display {
+  width: 48px;
+  height: 48px;
+  background-color: #EDF7F6;
+  color: #000022;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 15px;
+  font-family: 'Mulish', sans-serif;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: 'Mulish', sans-serif;
+}
+
+.tagasi {
+  background-color: #333;
+  color: white;
+  width: 120px;
+}
+
+.järgmine {
+  background-color: #DE3C4B;
+  color: white;
+  width: 120px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: white;
+  font-size: 18px;
+}
+
+/* Responsive design */
+@media (min-width: 768px) {
+  .criteria-sections {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .criteria-section {
+    flex: 1;
+    min-width: 250px;
+  }
+}

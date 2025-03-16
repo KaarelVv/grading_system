@@ -1,63 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
-
 .teams-sidebar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  background-color: #DE3C4B;
-  color: white;
-  font-family: 'Mulish', sans-serif;
-  transition: width 0.3s ease-in-out;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.teams-sidebar.collapsed {
-  width: 12px;
-}
-
-.teams-sidebar.expanded {
-  width: 200px;
-}
-
-.teams-header {
-  height: 12px;
-  background-color: #0099FF;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.teams-indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: white;
-}
-
-.teams-list {
-  flex-grow: 1;
-  padding: 20px 10px;
-  overflow-y: auto;
-}
-
-.team-item {
-  padding: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.team-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.team-item.active {
-  background-color: rgba(255, 255, 255, 0.2);
-  font-weight: 700;
-}
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 12px;
+    background-color: #DE3C4B;
+    color: white;
+    font-family: 'Mulish', sans-serif;
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+  }
+  
+  .teams-sidebar.expanded {
+    width: 200px;
+  }
+  
+  .team-item {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .team-item.active {
+    font-weight: 800;
+  }
+  

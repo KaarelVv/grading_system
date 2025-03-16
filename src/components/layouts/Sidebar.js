@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import './sidebar.css';
+import './Sidebar.css';
 
 const Sidebar = ({ teams, activeTeam, onTeamSelect }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
 
   return (
     <div 
@@ -14,13 +10,10 @@ const Sidebar = ({ teams, activeTeam, onTeamSelect }) => {
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
     >
-      <div className="teams-header">
-        <div className="teams-indicator"></div>
-      </div>
       <div className="teams-list">
-        {teams.map((team, index) => (
+        {teams.map((team) => (
           <div 
-            key={index} 
+            key={team.id} 
             className={`team-item ${activeTeam === team.id ? 'active' : ''}`}
             onClick={() => onTeamSelect(team.id)}
           >
@@ -33,5 +26,3 @@ const Sidebar = ({ teams, activeTeam, onTeamSelect }) => {
 };
 
 export default Sidebar;
-
-
