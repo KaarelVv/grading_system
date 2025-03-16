@@ -106,7 +106,7 @@ https://react-bootstrap.netlify.app/docs/getting-started/why-react-bootstrap
 
     return ContentService.createTextOutput(JSON.stringify(result))
       .setMimeType(ContentService.MimeType.JSON);
-  }
+    }
 
   
     // If "update=true" is in the URL, process the update request
