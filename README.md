@@ -71,3 +71,106 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### How to use react bootstrap
 https://react-bootstrap.netlify.app/docs/getting-started/why-react-bootstrap
+
+### GS backend
+ `function doGet(e) {
+  const sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1Yf36ymF2PFH5DRWZP4sxBQaQDjMKynmax-Edmo2ntpA/edit?gid=0#gid=0").getSheetByName("Sheet1");
+
+  // If no parameters are provided, return all team data
+  if (!e || !e.parameter || Object.keys(e.parameter).length === 0) {
+    let data = sheet.getDataRange().getValues();
+    data.shift(); // Remove headers
+
+    let result = data.map(row => ({
+      Team: row[0],
+      CategoryA: {
+        SubCategory1: row[1] || 0,
+        SubCategory2: row[2] || 0,
+        SubCategory3: row[3] || 0
+      },
+      CategoryB: {
+        SubCategory1: row[4] || 0,
+        SubCategory2: row[5] || 0,
+        SubCategory3: row[6] || 0
+      },
+      CategoryC: {
+        SubCategory1: row[7] || 0,
+        SubCategory2: row[8] || 0,
+        SubCategory3: row[9] || 0
+      },
+      Total: row[10] || 0
+    }));
+
+    return ContentService.createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // If "update=true" is in the URL, process the update request
+  if (e.parameter.update) {
+    let team = e.parameter.Team;
+
+    let catA1 = parseInt(e.parameter.CategoryA1, 10);
+    let catA2 = parseInt(e.parameter.CategoryA2, 10);
+    let catA3 = parseInt(e.parameter.CategoryA3, 10);
+
+    let catB1 = parseInt(e.parameter.CategoryB1, 10);
+    let catB2 = parseInt(e.parameter.CategoryB2, 10);
+    let catB3 = parseInt(e.parameter.CategoryB3, 10);
+
+    let catC1 = parseInt(e.parameter.CategoryC1, 10);
+    let catC2 = parseInt(e.parameter.CategoryC2, 10);
+    let catC3 = parseInt(e.parameter.CategoryC3, 10);
+
+    let totalScore = catA1 + catA2 + catA3 + catB1 + catB2 + catB3 + catC1 + catC2 + catC3;
+
+    let range = sheet.getDataRange();
+    let values = range.getValues();
+
+    for (let i = 1; i < values.length; i++) {
+      if (values[i][0] === team) {
+        sheet.getRange(i + 1, 2).setValue(catA1);
+        sheet.getRange(i + 1, 3).setValue(catA2);
+        sheet.getRange(i + 1, 4).setValue(catA3);
+
+        sheet.getRange(i + 1, 5).setValue(catB1);
+        sheet.getRange(i + 1, 6).setValue(catB2);
+        sheet.getRange(i + 1, 7).setValue(catB3);
+
+        sheet.getRange(i + 1, 8).setValue(catC1);
+        sheet.getRange(i + 1, 9).setValue(catC2);
+        sheet.getRange(i + 1, 10).setValue(catC3);
+
+        sheet.getRange(i + 1, 11).setValue(totalScore); // Updating Total Points
+
+        let updatedRow = sheet.getRange(i + 1, 1, 1, 11).getValues()[0];
+
+        return ContentService.createTextOutput(JSON.stringify({
+          Team: updatedRow[0],
+          CategoryA: {
+            SubCategory1: updatedRow[1],
+            SubCategory2: updatedRow[2],
+            SubCategory3: updatedRow[3]
+          },
+          CategoryB: {
+            SubCategory1: updatedRow[4],
+            SubCategory2: updatedRow[5],
+            SubCategory3: updatedRow[6]
+          },
+          CategoryC: {
+            SubCategory1: updatedRow[7],
+            SubCategory2: updatedRow[8],
+            SubCategory3: updatedRow[9]
+          },
+          Total: updatedRow[10]
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+
+    return ContentService.createTextOutput("Team not found")
+      .setMimeType(ContentService.MimeType.TEXT);
+  }
+
+  return ContentService.createTextOutput("Invalid request")
+    .setMimeType(ContentService.MimeType.TEXT);
+}
+`
