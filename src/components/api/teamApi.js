@@ -1,4 +1,4 @@
-const API_URL = "";
+const API_URL = "https://script.google.com/macros/s/AKfycbwmV0TzpzOGWeNg4vyMZyDiofo1nESmJOC6NLupkuOkteqYONLco_RcvjIUmQIznKjk9w/exec";
 
 // ✅ Fetch team data for a specific grader
 export async function fetchTeamData(grader) {
@@ -50,4 +50,39 @@ export async function updateTeamScore(grader, teamName, formData) {
     return "Update failed";
   }
 }
+
+export async function fetchMergedTeamData() {
+    try {
+      const [grader1Data, grader2Data] = await Promise.all([
+        fetchTeamData("Grader1"),
+        fetchTeamData("Grader2")
+      ]);
+  
+      return mergeTeamScores(grader1Data, grader2Data);
+    } catch (error) {
+      console.error("Error fetching merged team data:", error);
+      return [];
+    }
+  }
+
+  function mergeTeamScores(data1, data2) {
+    const teamMap = new Map();
+  
+    [...data1, ...data2].forEach(team => {
+      if (!teamMap.has(team.Team)) {
+        teamMap.set(team.Team, { ...team });
+      } else {
+        const existing = teamMap.get(team.Team);
+        existing.Total += team.Total;
+  
+        ["CategoryA", "CategoryB", "CategoryC"].forEach(category => {
+          Object.keys(team[category]).forEach(sub => {
+            existing[category][sub] += team[category][sub];
+          });
+        });
+      }
+    });
+  
+    return Array.from(teamMap.values());
+  }
 
