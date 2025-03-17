@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchTeamData } from "../api/teamApi"; // Import API function
-import "../../assets/styles/Sidebar.css"; // Make sure you have some styling
+import "../../assets/styles/Sidebar.css";
 
 function Sidebar({ onSelectTeam, grader }) {
   const [teams, setTeams] = useState([]);

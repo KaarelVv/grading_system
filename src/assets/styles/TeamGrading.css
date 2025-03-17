@@ -1,48 +1,129 @@
 .team-grading-container {
-    padding: 20px;
-    max-width: 800px;
-    margin: auto;
-    text-align: center;
-  }
-  
-  .categories-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  
-  .category-column {
-    flex: 1;
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  .subcategory {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .subcategory input[type="range"] {
-    width: 100%;
-  }
-  
-  button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.categories-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.category-column {
+  flex: 1;
+  background: #de3c4b;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #edf7f6;
+  text-align: center;
+}
+
+.subcategory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* Updated slider styling for all browsers */
+.subcategory input[type="range"] {
+  width: 100%;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #d0d0d0; /* Light gray color for the track */
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Slider thumb for Webkit browsers (Chrome, Safari) */
+.subcategory input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff; /* White thumb */
+  cursor: pointer;
+  border: 1px solid #b0b0b0; /* Light gray border */
+}
+
+/* Slider thumb for Firefox */
+.subcategory input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff; /* White thumb */
+  cursor: pointer;
+  border: 1px solid #b0b0b0; /* Light gray border */
+}
+
+/* Slider thumb for IE */
+.subcategory input[type="range"]::-ms-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff; /* White thumb */
+  cursor: pointer;
+  border: 1px solid #b0b0b0; /* Light gray border */
+}
+
+/* Active state - remove blue highlight when slider is being used */
+.subcategory input[type="range"]:active::-webkit-slider-thumb {
+  background: #f8f8f8; /* Slightly darker white for active state */
+  border: 1px solid #b0b0b0;
+  outline: none;
+}
+
+.subcategory input[type="range"]:focus {
+  outline: none;
+}
+
+/* Track styling for Firefox */
+.subcategory input[type="range"]::-moz-range-track {
+  background: #d0d0d0; /* Light gray */
+  height: 8px;
+  border-radius: 4px;
+}
+
+/* Track styling for IE */
+.subcategory input[type="range"]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+  height: 8px;
+}
+
+.subcategory input[type="range"]::-ms-fill-lower {
+  background: #d0d0d0; /* Light gray */
+  border-radius: 4px;
+}
+
+.subcategory input[type="range"]::-ms-fill-upper {
+  background: #d0d0d0; /* Light gray */
+  border-radius: 4px;
+}
+
+.subcategory label {
+  margin-top: 5px;
+  color: #edf7f6;
+  font-weight: 600;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #de3c4b;
+  color: #edf7f6;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #f16b79;
+}
