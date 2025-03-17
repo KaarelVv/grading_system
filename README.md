@@ -76,7 +76,7 @@ https://react-bootstrap.netlify.app/docs/getting-started/why-react-bootstrap
 `
     
     function doGet(e) {
-    const spreadsheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1oTGuUIwRui1ftdf4SnV9FpwL8YIR2vo1Qk7ZQ4irwCo/edit?gid=0#gid=0");
+    const spreadsheet = SpreadsheetApp.openByUrl("SHEET URL");
   
     const sheet1 = spreadsheet.getSheetByName("Sheet1"); // Grader 1
     const sheet2 = spreadsheet.getSheetByName("Sheet2"); // Grader 2
