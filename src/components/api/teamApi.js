@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwmV0TzpzOGWeNg4vyMZyDiofo1nESmJOC6NLupkuOkteqYONLco_RcvjIUmQIznKjk9w/exec";
+const API_URL = "";
 
 // ✅ Fetch team data for a specific grader
 export async function fetchTeamData(grader) {
