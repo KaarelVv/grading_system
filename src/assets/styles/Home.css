@@ -1,8 +1,8 @@
 
 .Home {
     background: linear-gradient(
-        rgba(0, 0, 34, 0.5),
-        rgba(0, 0, 0, 0.5)
+        rgba(0, 0, 34, 0.9),
+        rgba(0, 0, 0, 0.9)
     );
     background-size: cover;
     background-position: center;
@@ -23,7 +23,7 @@
     color: #EDF7F6;
     text-align: center;
     font-family: Mulish;
-    font-size: 96px;
+    font-size: 85px;
     font-style: normal;
     font-weight: 900;
     line-height: normal;
@@ -57,7 +57,7 @@
   
   .button {
     width: 361px;
-    height: 126px;
+    height: 100px;
     flex-shrink: 0;
     border-radius: 25px;
     background: #DE3C4B;
