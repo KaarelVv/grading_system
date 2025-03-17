@@ -1,11 +1,8 @@
 import React from "react";
 import { useState } from 'react';
 import "./Home.css";
-import backgroundImage from "./background.jpeg"; // Adjust the path accordingly
-import CategoryPage from '../CategoryPage'
+import CategoryPage from '../CategoryPage';
 import Sidebar from '../layouts/Sidebar';
-
-
 
 const Home = () => {
   const [view, setView] = useState('home');
@@ -31,14 +28,31 @@ const Home = () => {
     setActiveTeam(teamId);
   };
 
-  // Handle category change
+  // Handle category change or back to home
   const handleCategoryChange = (newCategory) => {
-    setCategory(newCategory);
+    if (newCategory === 'home') {
+      setView('home');
+    } else {
+      setCategory(newCategory);
+    }
   };
 
-  // Go back to home screen
-  const handleBackToHome = () => {
-    setView('home');
+  // Handle scores update
+  const handlePointsUpdate = (teamId, categoryKey, scores) => {
+    setTeams(prevTeams => {
+      return prevTeams.map(team => {
+        if (team.id === teamId) {
+          return {
+            ...team,
+            scores: {
+              ...team.scores,
+              [categoryKey]: scores
+            }
+          };
+        }
+        return team;
+      });
+    });
   };
 
   return (
@@ -58,9 +72,6 @@ const Home = () => {
         </div>
       ) : (
         <div className="category-view">
-          <div className="category-tabs">
-          </div>
-          
           <div className="category-content">
             <Sidebar 
               teams={teams} 
@@ -73,6 +84,8 @@ const Home = () => {
               assessorName={assessorName}
               teams={teams}
               activeTeam={activeTeam}
+              onCategoryChange={handleCategoryChange}
+              onPointsUpdate={handlePointsUpdate}
             />
           </div>
         </div>

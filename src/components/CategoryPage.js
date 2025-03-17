@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './CategoryPage.css';
 
-const CategoryPage = ({ category, assessorName, teams, onPointsUpdate }) => {
+const CategoryPage = ({ category, assessorName, teams, activeTeam, onCategoryChange }) => {
   const [teamScores, setTeamScores] = useState({});
-  const [activeTeam, setActiveTeam] = useState(null);
-  const [activeDot, setActiveDot] = useState(0);
   const [activeCategory, setActiveCategory] = useState(category);
-  const totalDots = 8;
-
-  // Categories mapping to indexes
+  
+  // Categories mapping
   const categories = ['design', 'facts', 'functionality'];
+  const categoryTitles = {
+    'design': 'DISAIN',
+    'facts': 'ÕPETLIKKUS ja FAKTITÄPSUS',
+    'functionality': 'FUNKTSIONAALSUS ja JÕUDLUS'
+  };
 
   useEffect(() => {
     // Initialize scores from teams data if available
@@ -17,15 +19,21 @@ const CategoryPage = ({ category, assessorName, teams, onPointsUpdate }) => {
       const initialScores = {};
       teams.forEach(team => {
         initialScores[team.id] = {
-          criteria1: team.scores?.[category]?.criteria1 || 0,
-          criteria2: team.scores?.[category]?.criteria2 || 0,
-          criteria3: team.scores?.[category]?.criteria3 || 0
+          criteria1: team.scores?.[activeCategory]?.criteria1 || 0,
+          criteria2: team.scores?.[activeCategory]?.criteria2 || 0,
+          criteria3: team.scores?.[activeCategory]?.criteria3 || 0
         };
       });
       setTeamScores(initialScores);
-      setActiveTeam(teams[0].id);
     }
-  }, [teams, category]);
+  }, [teams, activeCategory]);
+
+  // Update active category when it changes externally
+  useEffect(() => {
+    if (categories.includes(category)) {
+      setActiveCategory(category);
+    }
+  }, [category, categories]);
 
   const handlePointChange = (teamId, criteriaKey, increment) => {
     setTeamScores(prevScores => {
@@ -33,11 +41,14 @@ const CategoryPage = ({ category, assessorName, teams, onPointsUpdate }) => {
       
       // Calculate new score with limits
       let newScore;
-      if (criteriaKey === 'criteria1') {
-        newScore = Math.min(Math.max(currentScore + increment, 0), 13);
-      } else {
-        newScore = Math.min(Math.max(currentScore + increment, 0), 10);
+      // Adjust max points based on criteria and category
+      let maxPoints = 10;
+      if ((activeCategory === 'facts' && criteriaKey === 'criteria1') || 
+          (activeCategory === 'functionality' && criteriaKey === 'criteria1')) {
+        maxPoints = 13;
       }
+      
+      newScore = Math.min(Math.max(currentScore + increment, 0), maxPoints);
       
       const updatedTeamScores = {
         ...prevScores,
@@ -47,23 +58,15 @@ const CategoryPage = ({ category, assessorName, teams, onPointsUpdate }) => {
         }
       };
       
-      // Call the parent component's update handler
-      if (onPointsUpdate) {
-        onPointsUpdate(teamId, activeCategory, {
-          ...updatedTeamScores[teamId]
-        });
-      }
-      
       return updatedTeamScores;
     });
   };
 
   const getCategoryDetails = () => {
     switch(activeCategory) {
-      case 'design':
+      case 'facts':
         return {
           title: 'ÕPETLIKKUS ja FAKTITÄPSUS',
-          titleRight: 'FUNKTSIONAALSUS ja JÕUDLUS',
           section1: {
             title: 'Seotus küberturbega',
             description: 'Kas mängu sisu on teemakohane ja küberjulgeolekuga seotud?',
@@ -80,7 +83,55 @@ const CategoryPage = ({ category, assessorName, teams, onPointsUpdate }) => {
             maxPoints: 10
           }
         };
+      case 'functionality':
+        return {
+          title: 'FUNKTSIONAALSUS ja JÕUDLUS',
+          section1: {
+            title: 'Vigade puudumine ja jõudlus',
+            description: 'Kas mäng reageerib loogiliselt? Laeb viivitusteta? Kommunikeerib vigase sisendi veateatena?',
+            maxPoints: 13
+          },
+          section2: {
+            title: 'Dokumentatsioon ja help',
+            description: 'Kas on kirjutatud korralik README ja vormistatud kasutusjuhend?',
+            maxPoints: 10
+          },
+          section3: {
+            title: 'Koodi loetavus ja struktuur',
+            description: 'Kas kood on hästi organiseeritud, optimeeritud, kommenteeritud ja arusaadav? DRY?',
+            maxPoints: 10
+          }
+        };
+      case 'design':
+      default:
+        return {
+          title: 'DISAIN',
+          section1: {
+            title: 'Visuaalne atraktiivsus',
+            description: 'Kas mängu visuaalne disain on atraktiivne ja hästi teostatud?',
+            maxPoints: 10
+          },
+          section2: {
+            title: 'Kasutajaliidese selgus',
+            description: 'Kas kasutajaliides on selge, intuitiivne ja hästi organiseeritud?',
+            maxPoints: 10
+          },
+          section3: {
+            title: 'Kasutajakogemuse sujuvus',
+            description: 'Kas kasutajakogemus on sujuv ja meeldiv?',
+            maxPoints: 10
+          }
+        };
     }
+  };
+
+  // Get the next category in sequence
+  const getNextCategory = (currentCategory) => {
+    const currentIndex = categories.indexOf(currentCategory);
+    if (currentIndex === -1 || currentIndex === categories.length - 1) {
+      return categories[0]; // Loop back to first category if at end or not found
+    }
+    return categories[currentIndex + 1];
   };
 
   const categoryDetails = getCategoryDetails();
@@ -90,14 +141,14 @@ const CategoryPage = ({ category, assessorName, teams, onPointsUpdate }) => {
     return <div className="loading">Laadimine...</div>;
   }
 
-  const renderScoreControl = (teamId, criteriaKey, maxPoints) => {
-    const score = teamScores[teamId]?.[criteriaKey] || 0;
+  const renderScoreControl = (criteriaKey, maxPoints) => {
+    const score = teamScores[activeTeam]?.[criteriaKey] || 0;
     
     return (
       <div className="score-control">
         <button 
           className="score-button minus" 
-          onClick={() => handlePointChange(teamId, criteriaKey, -1)}
+          onClick={() => handlePointChange(activeTeam, criteriaKey, -1)}
           disabled={score <= 0}
         >
           -
@@ -105,7 +156,7 @@ const CategoryPage = ({ category, assessorName, teams, onPointsUpdate }) => {
         <div className="score-display">{score}</div>
         <button 
           className="score-button plus" 
-          onClick={() => handlePointChange(teamId, criteriaKey, 1)}
+          onClick={() => handlePointChange(activeTeam, criteriaKey, 1)}
           disabled={score >= maxPoints}
         >
           +
@@ -114,50 +165,70 @@ const CategoryPage = ({ category, assessorName, teams, onPointsUpdate }) => {
     );
   };
 
-  // Dot navigation handlers
+  // Get the next category
   const handleNext = () => {
-    const nextDot = activeDot < totalDots - 1 ? activeDot + 1 : activeDot;
-    setActiveDot(nextDot);
+    const nextCategory = getNextCategory(activeCategory);
     
-    // Change category if needed
-    const categoryIndex = Math.floor(nextDot / 3) % categories.length;
-    setActiveCategory(categories[categoryIndex]);
+    setActiveCategory(nextCategory);
+    
+    // Inform parent about category change
+    if (onCategoryChange) {
+      onCategoryChange(nextCategory);
+    }
   };
 
+  // Get the previous category or go back to home
   const handleBack = () => {
-    const prevDot = activeDot > 0 ? activeDot - 1 : activeDot;
-    setActiveDot(prevDot);
+    const categoryIndex = categories.indexOf(activeCategory);
     
-    // Change category if needed
-    const categoryIndex = Math.floor(prevDot / 3) % categories.length;
-    setActiveCategory(categories[categoryIndex]);
+    if (categoryIndex <= 0) {
+      // Go back to home if we're at the first category
+      if (onCategoryChange) {
+        onCategoryChange('home');
+      }
+    } else {
+      // Go to previous category
+      const prevCategory = categories[categoryIndex - 1];
+      
+      setActiveCategory(prevCategory);
+      
+      // Inform parent about category change
+      if (onCategoryChange) {
+        onCategoryChange(prevCategory);
+      }
+    }
   };
 
   // Dot click handler
   const handleDotClick = (index) => {
-    setActiveDot(index);
-    
     // Change category based on dot index
-    const categoryIndex = Math.floor(index / 3) % categories.length;
-    setActiveCategory(categories[categoryIndex]);
+    const newCategory = categories[index];
+    
+    if (newCategory !== activeCategory) {
+      setActiveCategory(newCategory);
+      
+      // Inform parent about category change
+      if (onCategoryChange) {
+        onCategoryChange(newCategory);
+      }
+    }
   };
 
   return (
     <div className="category-page">
       <div className="assessor-info">
         <div className="meeskonna-nimi">
-          MEESKONNA NIMI
+          <div className="category-name">{categoryTitles[activeCategory]}</div>
           <div className="team-name">{currentTeam.name}</div>
-          <div className="category-name">{categoryDetails.title}</div>
         </div>
       </div>
       
-      {/* Dot navigation */}
+      {/* Dot navigation - just 3 dots (one per category) */}
       <div className="dot-navigation">
-        {[...Array(totalDots)].map((_, index) => (
+        {categories.map((cat, index) => (
           <div 
             key={index}
-            className={`dot ${activeDot === index ? 'active' : ''}`}
+            className={`dot ${activeCategory === cat ? 'active' : ''}`}
             onClick={() => handleDotClick(index)}
           />
         ))}
@@ -167,19 +238,19 @@ const CategoryPage = ({ category, assessorName, teams, onPointsUpdate }) => {
         <div className="criteria-section">
           <h3>{categoryDetails.section1.title}</h3>
           <p>{categoryDetails.section1.description}</p>
-          {renderScoreControl(activeTeam, 'criteria1', categoryDetails.section1.maxPoints)}
+          {renderScoreControl('criteria1', categoryDetails.section1.maxPoints)}
         </div>
         
         <div className="criteria-section">
           <h3>{categoryDetails.section2.title}</h3>
           <p>{categoryDetails.section2.description}</p>
-          {renderScoreControl(activeTeam, 'criteria2', categoryDetails.section2.maxPoints)}
+          {renderScoreControl('criteria2', categoryDetails.section2.maxPoints)}
         </div>
         
         <div className="criteria-section">
           <h3>{categoryDetails.section3.title}</h3>
           <p>{categoryDetails.section3.description}</p>
-          {renderScoreControl(activeTeam, 'criteria3', categoryDetails.section3.maxPoints)}
+          {renderScoreControl('criteria3', categoryDetails.section3.maxPoints)}
         </div>
       </div>
       
