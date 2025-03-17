@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { fetchTeamData } from "../api/teamApi"; // Import API function
-import Button from "react-bootstrap/Button"; // Import Bootstrap button
 import "../../assets/styles/Sidebar.css"; // Make sure you have some styling
 
 function Sidebar({ onSelectTeam, grader }) {
@@ -26,14 +25,14 @@ function Sidebar({ onSelectTeam, grader }) {
       <h2>Select a Team</h2>
       <div className="team-buttons">
         {teams.map((team, index) => (
-          <Button
+          <button
             key={index}
             variant="outline-primary"
             className={`team-button ${selectedTeam === team ? "active" : ""}`} // ✅ Add active class
             onClick={() => handleTeamClick(team)}
           >
             {team}
-          </Button>
+          </button>
         ))}
       </div>
     </div>

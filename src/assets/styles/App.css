@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Mulish', sans-serif;
+}
+
 .App {
   text-align: center;
   background-image: url("../images/background.jpeg");

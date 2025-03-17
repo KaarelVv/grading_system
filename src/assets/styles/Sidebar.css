@@ -1,15 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;700&display=swap');
+
 .sidebar {
     width: 250px; /* Adjust width as needed */
     padding: 20px;
-    background-color: #f8f9fa;
-    border-right: 1px solid #ddd;
+    background-color: #de3c4b;
+    border-right: 1px solid #de3c4b;
   }
-  
+  .sidebar h2 {
+    font-family: 'Mulish', sans-serif;
+    color: #edf7f6;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
   .team-buttons {
     display: flex;
     flex-direction: column;
     align-items: flex-start; /* ✅ Align buttons to the left */
     gap: 10px;
+    border-radius: 10px;
   }
   
   .team-button {
@@ -17,21 +26,21 @@
     text-align: left;
     padding: 12px;
     font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #007bff;
-    color: #007bff;
-    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #edf7f6;
+    color: #edf7f6;
+    background-color: #de3c4b;
     transition: all 0.3s;
   }
   
   .team-button:hover {
-    background-color: #007bff;
-    color: white;
+    background-color: #f16b79;
+    color: #edf7f6;
   }
   
   .team-button.active {
-    background-color: #0056b3; /* ✅ Different color when selected */
-    color: white;
-    border-color: #0056b3;
+    background-color: #f16b79; 
+    color: #edf7f6;
+    border-color: #edf7f6;
   }
   
