@@ -1,17 +1,15 @@
-import Grading from './components/pages/Grading';
-import './styles/App.css'
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Grading from "./pages/Grading";
 
 function App() {
   return (
-    <>
-      <Grading></Grading>
-      </>
-      );
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/grading" element={<Grading />} />
+      
+    </Routes>
+  );
 }
 
 export default App;
