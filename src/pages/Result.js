@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchMergedTeamData } from "../components/api/teamApi";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const Result = () => {
   const [data, setData] = useState([]);

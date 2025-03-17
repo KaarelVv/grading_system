@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background-color: #000022;
+    color: #edf7f6
   }
   
   .top-bar {
@@ -9,9 +11,26 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background-color: #f8f9fa;
+    background-color: #000022;
     border-bottom: 1px solid #ddd;
   }
+
+  .top-bar button {
+    text-align: left;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #edf7f6;
+    color: #edf7f6;
+    background-color: #de3c4b;
+    transition: all 0.3s;
+  }
+  
+  .top-bar button:hover {
+    background-color: #f16b79;
+    color: #edf7f6;
+  }
+  
   
   .grading-layout {
     display: flex;
@@ -22,5 +41,22 @@
     flex-grow: 1;
     padding: 20px;
     text-align: center;
+    background-color: #000022;
   }
+
+.update-button {
+  background-color: #de3c4b;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.update-button:hover {
+  background-color: #c82333;
+}
   
