@@ -20,7 +20,7 @@
     padding: 12px;
     font-size: 16px;
     border-radius: 10px;
-    border: 1px solid #edf7f6;
+    border: none;
     color: #edf7f6;
     background-color: #de3c4b;
     transition: all 0.3s;
