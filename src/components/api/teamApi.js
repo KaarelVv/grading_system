@@ -8,7 +8,7 @@ export async function fetchTeamData(grader) {
     console.log("Raw API Response:", text);
 
     const data = JSON.parse(text);
-    console.log("Parsed Team Data:", data);
+    //console.log("Parsed Team Data:", data);
 
     if (data.error) {
       console.error("API Error:", data.error);

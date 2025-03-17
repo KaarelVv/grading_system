@@ -1,0 +1,33 @@
+.grading-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .grading-layout {
+    display: flex;
+    flex: 1;
+  }
+  
+  .sidebar {
+    width: 250px; /* ✅ Sidebar stays on the left */
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .grading-section {
+    flex-grow: 1;
+    padding: 20px;
+    text-align: center;
+  }
+  

@@ -1,4 +1,5 @@
 import React from "react";
+import "../assets/styles/LoadingSpinner.css"
 
 const LoadingSpinner = () => (
   <div className="d-flex justify-content-center">
