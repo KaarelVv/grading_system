@@ -73,7 +73,7 @@ const Result = () => {
       <h3>Parim skoor:</h3>
       <ul className="list-group">
         {highestTotalTeams.map(team => (
-          <li className="list-group-item" key={team.Team}>{team.Team} - {team.Total} points</li>
+          <li className="list-group-item" key={team.Team}>{team.Team} - {team.Total} punkti</li>
         ))}
       </ul>
 
@@ -84,7 +84,7 @@ const Result = () => {
             <h4>{categoriesEST[category] || category}:</h4>
             <ul className="list-group">
               {teams.map(team => (
-                <li className="list-group-item" key={team.name}>{team.name} - {team.score} points</li>
+                <li className="list-group-item" key={team.name}>{team.name} - {team.score} punkti</li>
               ))}
             </ul>
           </div>
