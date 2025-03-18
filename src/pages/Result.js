@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchMergedTeamData } from "../components/api/teamApi";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "../assets/styles/Result.css"
 
 const Result = () => {
   const [data, setData] = useState([]);
@@ -43,22 +43,22 @@ const Result = () => {
   };
 
   if (loading) {
-    return <p className="text-center mt-4">Loading...</p>;
+    return <div className="loading-message">Loading...</div>;
   }
 
   if (!data.length) {
-    return <p className="text-center mt-4">No data available.</p>;
+    return <div className="loading-message">No data available.</div>;
   }
 
   const highestTotalTeams = getHighestTotalTeams(data);
   const highestCategoryTeams = getHighestCategoryTeams(data);
 
   return (
-    <div className="container mt-4">
+    <div className="container">
       <h2 className="text-center">Results</h2>
-      <div className="text-center mb-4">
-        <button className="btn btn-primary me-2" onClick={() => navigate("/")}>Home</button>
-        <button className="btn btn-secondary" onClick={() => navigate("/grading")}>Go to Grading</button>
+      <div className="nav-buttons">
+        <button className="results-button" onClick={() => navigate("/")}>Home</button>
+        <button className="results-button" onClick={() => navigate("/grading")}>Go to Grading</button>
       </div>
       <h3>Teams with Highest Total Score:</h3>
       <ul className="list-group">
@@ -67,17 +67,19 @@ const Result = () => {
         ))}
       </ul>
 
-      <h3 className="mt-4">Teams with Highest Category Scores:</h3>
-      {Object.entries(highestCategoryTeams).map(([category, teams]) => (
-        <div key={category} className="mt-3">
-          <h4>{category}:</h4>
-          <ul className="list-group">
-            {teams.map(team => (
-              <li className="list-group-item" key={team.Team}>{team.Team}</li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      <div className="highest-category-section">
+        <h3>Teams with Highest Category Scores:</h3>
+        {Object.entries(highestCategoryTeams).map(([category, teams]) => (
+          <div key={category} className="category-section">
+            <h4>{category}:</h4>
+            <ul className="list-group">
+              {teams.map(team => (
+                <li className="list-group-item" key={team.Team}>{team.Team}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

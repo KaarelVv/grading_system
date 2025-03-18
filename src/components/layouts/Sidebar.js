@@ -1,48 +1,51 @@
 import { useState, useEffect } from "react";
-import { fetchTeamData } from "../api/teamApi"; // Import API function
-import Button from "react-bootstrap/Button"; // Import Bootstrap button
-import "../../assets/styles/Sidebar.css"; // Make sure you have some styling
+import { fetchTeamData } from "../api/teamApi";
+import LoadingSpinner from "../../UI/LoadingSpinner";
+import "../../assets/styles/Sidebar.css";
 
 function Sidebar({ onSelectTeam, grader }) {
   const [teams, setTeams] = useState([]);
-  const [selectedTeam, setSelectedTeam] = useState(null); // ✅ Track selected team
+  const [selectedTeam, setSelectedTeam] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadTeams() {
+      setLoading(true);
       const teamList = await fetchTeamData(grader);
-      setTeams(teamList.map(team => team.Team)); // Extract team names
+      setTeams(teamList.map(team => team.Team));
+      setLoading(false);
     }
 
     loadTeams();
   }, [grader]);
 
   const handleTeamClick = (team) => {
-    setSelectedTeam(team); // ✅ Set active team
+    setSelectedTeam(team);
     onSelectTeam(team);
   };
 
   return (
     <div className="sidebar">
       <h2>Select a Team</h2>
-      <div className="team-buttons">
-        {teams.map((team, index) => (
-          <Button
-            key={index}
-            variant="outline-primary"
-            className={`team-button ${selectedTeam === team ? "active" : ""}`} // ✅ Add active class
-            onClick={() => handleTeamClick(team)}
-          >
-            {team}
-          </Button>
-        ))}
-      </div>
+      {loading ? (
+        <div className="loading-container">
+          <LoadingSpinner />
+        </div>
+      ) : (
+        <div className="team-buttons">
+          {teams.map((team, index) => (
+            <button
+              key={index}
+              className={`team-button ${selectedTeam === team ? "active" : ""}`}
+              onClick={() => handleTeamClick(team)}
+            >
+              {team}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
 export default Sidebar;
-
-
-
-
-

@@ -1,23 +1,36 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import "../assets/styles/Home.css";
 
 const Home = () => {
   const navigate = useNavigate();
 
+  const handleNavigate = (grader, name) => {
+    navigate("/grading", { state: { grader, name } });
+  };
+
   return (
-    <div className="d-flex flex-column align-items-center mt-5">
-      <h1>Welcome to Team Grading</h1>
-      <p>Select your grader role to continue:</p>
-      <div className="mt-3">
-        <Button variant="primary" onClick={() => navigate("/grading?grader=1")}>
-          Grader 1
-        </Button>
-        <Button variant="secondary" onClick={() => navigate("/grading?grader=2")} className="ms-3">
-          Grader 2
-        </Button>
+    <div className="Home">
+      <div className="content">
+        <h1 className="title">KÜBERKÜPSETUS "OMLETT"</h1>
+        <p className="aasta">2025</p>
+        <p className="hindaja">Kes on hindaja?</p>
+
+        <div className="button-container">
+          <button className="button" onClick={() => handleNavigate(1, "Kalmer")}> 
+            Kalmer
+          </button>
+          <button className="button" onClick={() => handleNavigate(2, "Marko")}> 
+            Marko
+          </button>
+        </div>
+
+        <p className="tekst1">Sellel leheküljel saad hinnata küberküpsetusele "Omlett" esitatud töid</p>
+        <hr />
+        <p className="tekst2">Sinu abimees tööde hindamisel</p>
       </div>
     </div>
   );
-}
+};
 
 export default Home;
+

@@ -1,0 +1,116 @@
+.Home {
+    background: linear-gradient(
+        rgba(0, 0, 34, 0.1),
+        rgba(0, 0, 0, 0.1)
+    );
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.title {
+    color: #EDF7F6;
+    text-align: center;
+    font-family: Mulish;
+    font-size: 85px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.aasta {
+    color: #EDF7F6;
+    text-align: center;
+    font-family: Mulish;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    margin-bottom: 10px;
+}
+
+.hindaja {
+    color: #EDF7F6;
+    text-align: center;
+    font-family: Mulish;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    margin: 20px 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 60px; /* Adjusted from 140px to a more balanced 60px */
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.button {
+    width: 280px; /* Adjusted from 361px for better spacing */
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 25px;
+    background: #DE3C4B;
+    color: #EDF7F6;
+    font-family: Mulish;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #000022;
+}
+
+.tekst1 {
+    color: #EDF7F6;
+    text-align: center;
+    font-family: Mulish;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 20px 0;
+    max-width: 1200px;
+}
+
+hr {
+    width: 100%;
+    max-width: 1200px;
+    border-radius: 5px;
+    background: #DE3C4B;
+    height: 4px;
+    border: none;
+    margin: 25px 0;
+}
+
+.tekst2 {
+    color: #EDF7F6;
+    text-align: center;
+    font-family: Mulish;
+    font-size: 40px;
+    font-style: italic;
+    font-weight: 200;
+    line-height: normal;
+    margin-top: 20px;
+}

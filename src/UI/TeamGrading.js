@@ -7,6 +7,8 @@ function TeamGrading({ teamName, grader }) {
   const [teamData, setTeamData] = useState(null);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     if (!teamName || !grader) return;
@@ -18,30 +20,56 @@ function TeamGrading({ teamName, grader }) {
       if (team) {
         setTeamData(team);
         setFormData({
-          CategoryA1: team.CategoryA.SubCategory1,
-          CategoryA2: team.CategoryA.SubCategory2,
-          CategoryA3: team.CategoryA.SubCategory3,
-          CategoryB1: team.CategoryB.SubCategory1,
-          CategoryB2: team.CategoryB.SubCategory2,
-          CategoryB3: team.CategoryB.SubCategory3,
-          CategoryC1: team.CategoryC.SubCategory1,
-          CategoryC2: team.CategoryC.SubCategory2,
-          CategoryC3: team.CategoryC.SubCategory3
+          VisualAttractiveness: team.UserExperienceDesign.VisualAttractiveness,
+          Interactivity: team.UserExperienceDesign.Interactivity,
+          Animations: team.UserExperienceDesign.Animations,
+          CybersecurityRelevance: team.EducationalAccuracy.CybersecurityRelevance,
+          FactAccuracy: team.EducationalAccuracy.FactAccuracy,
+          LearningValue: team.EducationalAccuracy.LearningValue,
+          BugFreePerformance: team.Functionality.BugFreePerformance,
+          Documentation: team.Functionality.Documentation,
+          CodeStructure: team.Functionality.CodeStructure
         });
       }
       setLoading(false);
     }
-
     loadTeam();
   }, [teamName, grader]);
 
   const handleSubmit = async () => {
+    setSubmitting(true);
     const result = await updateTeamScore(grader, teamName, formData);
-    alert(result);
+    setAlertMessage(result);
+    setTimeout(() => setAlertMessage(""), 3000); // Hide alert after 3 seconds
+    setSubmitting(false);
+  };
+
+  // const categories = {
+  //   "User Experience & Design": ["VisualAttractiveness", "Interactivity", "Animations"],
+  //   "Educational Accuracy": ["CybersecurityRelevance", "FactAccuracy", "LearningValue"],
+  //   "Functionality & Performance": ["BugFreePerformance", "Documentation", "CodeStructure"]
+  // };
+
+  const categoriesEST = {
+    "Kasutajakogemus ja disain": ["VisualAttractiveness", "Interactivity", "Animations"],
+    "Õpetlikkus ja faktitäpsus": ["CybersecurityRelevance", "FactAccuracy", "LearningValue"],
+    "Funktsionaalsus ja jõudlus": ["BugFreePerformance", "Documentation", "CodeStructure"]
+  };
+  const translatedSubcategories = {
+    VisualAttractiveness: "Visuaalne atraktiivsus",
+    Interactivity: "Interaktiivsus",
+    Animations: "Animatsioonid",
+    CybersecurityRelevance: "Seotus küberturbega",
+    FactAccuracy: "Faktide täpsus",
+    LearningValue: "Õpitav väärtus",
+    BugFreePerformance: "Vigade puudumine",
+    Documentation: "Dokumentatsioon",
+    CodeStructure: "Koodi struktuur"
   };
 
   return (
     <div className="team-grading-container">
+      {alertMessage && <div className="popup-alert">{alertMessage}</div>}
       <h1>{teamName} </h1>
 
       {loading ? (
@@ -49,64 +77,34 @@ function TeamGrading({ teamName, grader }) {
       ) : teamData ? (
         <div>
           <p>Adjust scores using sliders and submit.</p>
-
           <div className="categories-container">
-            {/* Category A */}
-            <div className="category-column">
-              <h2>Category A</h2>
-              {[1, 2, 3].map((num) => (
-                <div key={num} className="subcategory">
-                  <input
-                    type="range"
-                    min="0"
-                    max="11"
-                    value={formData[`CategoryA${num}`]}
-                    onChange={(e) => setFormData({ ...formData, [`CategoryA${num}`]: e.target.value })}
-                  />
-                  <label>Subcategory {num}: {formData[`CategoryA${num}`]}</label>
-                </div>
-              ))}
-            </div>
+            {Object.entries(categoriesEST).map(([categoryName, subcategories], index) => (
+              <div key={index} className="category-box">
+                <h2>{categoryName}</h2>
+                {subcategories.map((subcategory, subIndex) => (
+                  <div key={subIndex} className="subcategory">
+                    <input
+                      type="range"
+                      min="0"
+                      max="11"
+                      value={formData[subcategory] || 0}
+                      onChange={(e) => setFormData({ ...formData, [subcategory]: e.target.value })}
+                    />
+                    <label>{translatedSubcategories[subcategory] || subcategory.replace(/([A-Z])/g, ' $1').trim()}: {formData[subcategory]}</label>
 
-            {/* Category B */}
-            <div className="category-column">
-              <h2>Category B</h2>
-              {[1, 2, 3].map((num) => (
-                <div key={num} className="subcategory">
-                  <input
-                    type="range"
-                    min="0"
-                    max="11"
-                    value={formData[`CategoryB${num}`]}
-                    onChange={(e) => setFormData({ ...formData, [`CategoryB${num}`]: e.target.value })}
-                  />
-                  <label>Subcategory {num}: {formData[`CategoryB${num}`]}</label>
-                </div>
-              ))}
-            </div>
-
-            {/* Category C */}
-            <div className="category-column">
-              <h2>Category C</h2>
-              {[1, 2, 3].map((num) => (
-                <div key={num} className="subcategory">
-                  <input
-                    type="range"
-                    min="0"
-                    max="11"
-                    value={formData[`CategoryC${num}`]}
-                    onChange={(e) => setFormData({ ...formData, [`CategoryC${num}`]: e.target.value })}
-                  />
-                  <label>Subcategory {num}: {formData[`CategoryC${num}`]}</label>
-                </div>
-              ))}
-            </div>
+                    {/* <label>{subcategory.replace(/([A-Z])/g, ' $1').trim()}: {formData[subcategory]}</label> */}
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
 
-          <button onClick={handleSubmit}>Update Scores</button>
+          <button className={submitting ? "submitting" : ""} onClick={handleSubmit} disabled={submitting}>
+            {submitting ? <LoadingSpinner /> : "Update Scores"}
+          </button>
         </div>
       ) : (
-        <p>No team data found.</p>
+        <p>Tiimi andmed puuduvad.</p>
       )}
     </div>
   );

@@ -1,48 +1,51 @@
 .team-grading-container {
-    padding: 20px;
-    max-width: 800px;
-    margin: auto;
-    text-align: center;
-  }
-  
-  .categories-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  
-  .category-column {
-    flex: 1;
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  .subcategory {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .subcategory input[type="range"] {
-    width: 100%;
-  }
-  
-  button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+  display: flex; /* Fixed typo */
+  flex-direction: column;
+  align-items: center;
+}
+
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.category-column {
+  flex: 1;
+  background: #de3c4b;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #edf7f6;
+  text-align: center;
+}
+
+/* Subcategory styling */
+.subcategory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.subcategory input[type="range"] {
+  width: 100%;
+  height: 8px;
+  appearance: none;
+  background: #d0d0d0;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Reuse button styles */
+button {
+  @extend .button;
+}
+
+button:hover {
+  background-color: #f16b79;
+}
