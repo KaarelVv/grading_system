@@ -4,6 +4,10 @@
   height: 100vh;
   background-color: #000022;
   color: #edf7f6;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+
 }
 
 .top-bar {

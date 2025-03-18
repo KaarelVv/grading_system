@@ -5,6 +5,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleNavigate = (grader, name) => {
+    localStorage.setItem("grader", grader);
+    localStorage.setItem("graderName", name);
     navigate("/grading", { state: { grader, name } });
   };
 
@@ -33,4 +35,3 @@ const Home = () => {
 };
 
 export default Home;
-

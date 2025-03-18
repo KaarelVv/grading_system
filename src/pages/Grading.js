@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../components/layouts/Sidebar";
 import TeamGrading from "../UI/TeamGrading";
-
 import "../assets/styles/Grading.css";
 
 const Grading = () => {
-  const [selectedTeam, setSelectedTeam] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
-  const { grader = "1", name: graderName = "Unknown" } = location.state || {};
+  const [selectedTeam, setSelectedTeam] = useState(null);
+
+  // Get grader details (No need for useState)
+  const grader = location.state?.grader || localStorage.getItem("grader") || "1";
+  const graderName = location.state?.name || localStorage.getItem("graderName") || "Unknown";
+
+  useEffect(() => {
+    if (!grader || !graderName) {
+      navigate("/"); // Redirect if no grader info is found
+    } else {
+      localStorage.setItem("grader", grader);
+      localStorage.setItem("graderName", graderName);
+    }
+  }, [grader, graderName, navigate]);
 
   return (
     <div className="grading-container">
@@ -25,7 +36,6 @@ const Grading = () => {
 
       <div className="grading-layout">
         <Sidebar onSelectTeam={setSelectedTeam} grader={grader} />
-
         <div className="grading-section">
           {selectedTeam ? (
             <TeamGrading teamName={selectedTeam} grader={grader} />
@@ -34,7 +44,6 @@ const Grading = () => {
           )}
         </div>
       </div>
-
     </div>
   );
 };

@@ -7,12 +7,21 @@ function Sidebar({ onSelectTeam, grader }) {
   const [teams, setTeams] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     async function loadTeams() {
       setLoading(true);
-      const teamList = await fetchTeamData(grader);
-      setTeams(teamList.map(team => team.Team));
+      setError(""); // Reset error message
+      try {
+        const teamList = await fetchTeamData(grader);
+        if (!teamList.length) {
+          setError("Ühtegi tiimi ei leitud.");
+        }
+        setTeams(teamList.map(team => team.Team));
+      } catch (err) {
+        setError("Viga tiimide laadimisel.");
+      }
       setLoading(false);
     }
 
@@ -31,6 +40,8 @@ function Sidebar({ onSelectTeam, grader }) {
         <div className="loading-container">
           <LoadingSpinner />
         </div>
+      ) : error ? (
+        <p className="error-message">{error}</p>
       ) : (
         <div className="team-buttons">
           {teams.map((team, index) => (

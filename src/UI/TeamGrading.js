@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { fetchTeamData, updateTeamScore } from "../components/api/teamApi"; // Import API functions
-import LoadingSpinner from "./LoadingSpinner"; // Import spinner
-import "../assets/styles/TeamGrading.css"; // Import CSS
+import { fetchTeamData, updateTeamScore } from "../components/api/teamApi";
+import LoadingSpinner from "./LoadingSpinner";
+import "../assets/styles/TeamGrading.css";
 
 const categoriesEST = {
   "Kasutajakogemus ja disain": ["VisualAttractiveness", "Interactivity", "Animations"],
@@ -22,8 +22,10 @@ const translatedSubcategories = {
 };
 
 function TeamGrading({ teamName, grader }) {
-  const [teamData, setTeamData] = useState(null);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState(() => {
+    return JSON.parse(localStorage.getItem(`grading_${grader}_${teamName}`)) || {};
+  });
+
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -38,8 +40,7 @@ function TeamGrading({ teamName, grader }) {
         const team = data.find(t => t.Team === teamName);
 
         if (team) {
-          setTeamData(team);
-          setFormData({
+          const formattedData = {
             VisualAttractiveness: team.UserExperienceDesign?.VisualAttractiveness || 0,
             Interactivity: team.UserExperienceDesign?.Interactivity || 0,
             Animations: team.UserExperienceDesign?.Animations || 0,
@@ -49,10 +50,9 @@ function TeamGrading({ teamName, grader }) {
             BugFreePerformance: team.Functionality?.BugFreePerformance || 0,
             Documentation: team.Functionality?.Documentation || 0,
             CodeStructure: team.Functionality?.CodeStructure || 0
-          });
-        } else {
-          console.warn("No matching team found:", teamName);
-          setTeamData(null);
+          };
+
+          setFormData(prevData => ({ ...prevData, ...formattedData }));
         }
       } catch (error) {
         console.error("Error fetching team data:", error);
@@ -62,6 +62,11 @@ function TeamGrading({ teamName, grader }) {
 
     loadTeam();
   }, [teamName, grader]);
+
+  // Save grading progress
+  useEffect(() => {
+    localStorage.setItem(`grading_${grader}_${teamName}`, JSON.stringify(formData));
+  }, [formData, grader, teamName]);
 
   const handleSubmit = async () => {
     setSubmitting(true);
@@ -82,7 +87,7 @@ function TeamGrading({ teamName, grader }) {
 
       {loading ? (
         <LoadingSpinner />
-      ) : teamData ? (
+      ) : (
         <div>
           <p>Kohanda slaiderit punktide sisestamiseks</p>
           <div className="categories-container">
@@ -106,11 +111,9 @@ function TeamGrading({ teamName, grader }) {
           </div>
 
           <button className={`button ${submitting ? "submitting" : ""}`} onClick={handleSubmit} disabled={submitting}>
-            {submitting ? <LoadingSpinner /> : "Update Scores"}
+            {submitting ? <LoadingSpinner /> : "Kinnita hinded"}
           </button>
         </div>
-      ) : (
-        <p>Tiimi andmed puuduvad.</p>
       )}
     </div>
   );
