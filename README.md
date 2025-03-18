@@ -1,18 +1,18 @@
-function doGet(e) {
-  const spreadsheet = SpreadsheetApp.openByUrl("SHEET_URL");
+    function doGet(e) {
+    const spreadsheet = SpreadsheetApp.openByUrl("SHEET_URL");
   
-  const sheet1 = spreadsheet.getSheetByName("Sheet1"); // Grader 1
-  const sheet2 = spreadsheet.getSheetByName("Sheet2"); // Grader 2
+    const sheet1 = spreadsheet.getSheetByName("Sheet1"); // Grader 1
+    const sheet2 = spreadsheet.getSheetByName("Sheet2"); // Grader 2
 
-  if (!e || !e.parameter) {
+    if (!e || !e.parameter) {
     return ContentService.createTextOutput("Missing parameters").setMimeType(ContentService.MimeType.TEXT);
-  }
+    }
 
-  let grader = e.parameter.Grader; // Get Grader from URL (1 or 2)
-  let sheet = grader === "1" ? sheet1 : sheet2; // Select the correct sheet
+    let grader = e.parameter.Grader; // Get Grader from URL (1 or 2)
+    let sheet = grader === "1" ? sheet1 : sheet2; // Select the correct sheet
 
-  // ✅ Fetching team data
-  if (e.parameter.getTeams) {
+    // ✅ Fetching team data
+    if (e.parameter.getTeams) {
     let data = sheet.getDataRange().getValues();
     data.shift(); // Remove first header row
     data.shift(); // Remove second header row
@@ -26,10 +26,10 @@ function doGet(e) {
     }));
 
     return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
-  }
+    }
 
-  // ✅ Updating a team's data
-  if (e.parameter.update) {
+    // ✅ Updating a team's data
+    if (e.parameter.update) {
     let team = e.parameter.Team;
 
     let ua1 = parseInt(e.parameter.VisualAttractiveness, 10) || 0;
@@ -73,7 +73,7 @@ function doGet(e) {
     }
 
     return ContentService.createTextOutput(`Update successful for Grader ${grader}`).setMimeType(ContentService.MimeType.TEXT);
-  }
+    }
 
-  return ContentService.createTextOutput("Invalid request").setMimeType(ContentService.MimeType.TEXT);
-}
+    return ContentService.createTextOutput("Invalid request").setMimeType(ContentService.MimeType.TEXT);
+    }
