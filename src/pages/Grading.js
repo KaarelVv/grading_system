@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../components/layouts/Sidebar";
 import TeamGrading from "../UI/TeamGrading";
-import HomeButton from "../UI/HomeButton";
+
 import "../assets/styles/Grading.css";
 
 const Grading = () => {
@@ -14,7 +14,9 @@ const Grading = () => {
   return (
     <div className="grading-container">
       <div className="top-bar">
-        <HomeButton />
+        <div className="nav-buttons">
+          <button className="results-button" onClick={() => navigate("/")}>Pealehele</button>
+        </div>
         <h2>Hindaja {grader}: {graderName}</h2>
         <button className="results-button" onClick={() => navigate("/results")}>
           Vaata tulemusi
@@ -25,9 +27,14 @@ const Grading = () => {
         <Sidebar onSelectTeam={setSelectedTeam} grader={grader} />
 
         <div className="grading-section">
-          {selectedTeam ? <TeamGrading teamName={selectedTeam} grader={grader} /> : <p>Select a team to grade</p>}
+          {selectedTeam ? (
+            <TeamGrading teamName={selectedTeam} grader={grader} />
+          ) : (
+            <p>Vali tiim hindamiseks</p>
+          )}
         </div>
       </div>
+
     </div>
   );
 };

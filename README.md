@@ -1,5 +1,5 @@
 function doGet(e) {
-  const spreadsheet = SpreadsheetApp.openByUrl("YOUR SHEET URL");
+  const spreadsheet = SpreadsheetApp.openByUrl("SHEET_URL");
   
   const sheet1 = spreadsheet.getSheetByName("Sheet1"); // Grader 1
   const sheet2 = spreadsheet.getSheetByName("Sheet2"); // Grader 2
@@ -17,62 +17,62 @@ function doGet(e) {
     data.shift(); // Remove first header row
     data.shift(); // Remove second header row
 
-  let result = data.map(row => ({
+    let result = data.map(row => ({
       Team: row[0],
-      CategoryA: { SubCategory1: row[1] || 0, SubCategory2: row[2] || 0, SubCategory3: row[3] || 0 },
-      CategoryB: { SubCategory1: row[4] || 0, SubCategory2: row[5] || 0, SubCategory3: row[6] || 0 },
-      CategoryC: { SubCategory1: row[7] || 0, SubCategory2: row[8] || 0, SubCategory3: row[9] || 0 },
+      UserExperienceDesign: { VisualAttractiveness: row[1] || 0, Interactivity: row[2] || 0, Animations: row[3] || 0 },
+      EducationalAccuracy: { CybersecurityRelevance: row[4] || 0, FactAccuracy: row[5] || 0, LearningValue: row[6] || 0 },
+      Functionality: { BugFreePerformance: row[7] || 0, Documentation: row[8] || 0, CodeStructure: row[9] || 0 },
       Total: row[10] || 0
     }));
 
-  return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
   }
 
   // ✅ Updating a team's data
   if (e.parameter.update) {
     let team = e.parameter.Team;
 
-  let catA1 = parseInt(e.parameter.CategoryA1, 10) || 0;
-    let catA2 = parseInt(e.parameter.CategoryA2, 10) || 0;
-    let catA3 = parseInt(e.parameter.CategoryA3, 10) || 0;
+    let ua1 = parseInt(e.parameter.VisualAttractiveness, 10) || 0;
+    let ua2 = parseInt(e.parameter.Interactivity, 10) || 0;
+    let ua3 = parseInt(e.parameter.Animations, 10) || 0;
 
-  let catB1 = parseInt(e.parameter.CategoryB1, 10) || 0;
-    let catB2 = parseInt(e.parameter.CategoryB2, 10) || 0;
-    let catB3 = parseInt(e.parameter.CategoryB3, 10) || 0;
+    let ed1 = parseInt(e.parameter.CybersecurityRelevance, 10) || 0;
+    let ed2 = parseInt(e.parameter.FactAccuracy, 10) || 0;
+    let ed3 = parseInt(e.parameter.LearningValue, 10) || 0;
 
-  let catC1 = parseInt(e.parameter.CategoryC1, 10) || 0;
-    let catC2 = parseInt(e.parameter.CategoryC2, 10) || 0;
-    let catC3 = parseInt(e.parameter.CategoryC3, 10) || 0;
+    let fn1 = parseInt(e.parameter.BugFreePerformance, 10) || 0;
+    let fn2 = parseInt(e.parameter.Documentation, 10) || 0;
+    let fn3 = parseInt(e.parameter.CodeStructure, 10) || 0;
 
-  let totalScore = catA1 + catA2 + catA3 + catB1 + catB2 + catB3 + catC1 + catC2 + catC3;
+    let totalScore = ua1 + ua2 + ua3 + ed1 + ed2 + ed3 + fn1 + fn2 + fn3;
 
-  let range = sheet.getDataRange();
+    let range = sheet.getDataRange();
     let values = range.getValues();
     let teamFound = false;
 
-  for (let i = 1; i < values.length; i++) {
+    for (let i = 1; i < values.length; i++) {
       if (values[i][0] === team) {
-        sheet.getRange(i + 1, 2).setValue(catA1);
-        sheet.getRange(i + 1, 3).setValue(catA2);
-        sheet.getRange(i + 1, 4).setValue(catA3);
-        sheet.getRange(i + 1, 5).setValue(catB1);
-        sheet.getRange(i + 1, 6).setValue(catB2);
-        sheet.getRange(i + 1, 7).setValue(catB3);
-        sheet.getRange(i + 1, 8).setValue(catC1);
-        sheet.getRange(i + 1, 9).setValue(catC2);
-        sheet.getRange(i + 1, 10).setValue(catC3);
+        sheet.getRange(i + 1, 2).setValue(ua1);
+        sheet.getRange(i + 1, 3).setValue(ua2);
+        sheet.getRange(i + 1, 4).setValue(ua3);
+        sheet.getRange(i + 1, 5).setValue(ed1);
+        sheet.getRange(i + 1, 6).setValue(ed2);
+        sheet.getRange(i + 1, 7).setValue(ed3);
+        sheet.getRange(i + 1, 8).setValue(fn1);
+        sheet.getRange(i + 1, 9).setValue(fn2);
+        sheet.getRange(i + 1, 10).setValue(fn3);
         sheet.getRange(i + 1, 11).setValue(totalScore); // Update total
 
-  teamFound = true;
+        teamFound = true;
         break;
       }
     }
 
-  if (!teamFound) {
+    if (!teamFound) {
       return ContentService.createTextOutput("Team not found").setMimeType(ContentService.MimeType.TEXT);
     }
 
-  return ContentService.createTextOutput(`Update successful for Grader ${grader}`).setMimeType(ContentService.MimeType.TEXT);
+    return ContentService.createTextOutput(`Update successful for Grader ${grader}`).setMimeType(ContentService.MimeType.TEXT);
   }
 
   return ContentService.createTextOutput("Invalid request").setMimeType(ContentService.MimeType.TEXT);

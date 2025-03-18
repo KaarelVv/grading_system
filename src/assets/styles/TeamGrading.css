@@ -41,11 +41,18 @@
   outline: none;
 }
 
-/* Reuse button styles */
-button {
-  @extend .button;
+.button {
+  background-color: #de3c4b;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #f16b79;
+  background-color: #290a0d;
 }

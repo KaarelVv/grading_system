@@ -16,10 +16,10 @@ const Home = () => {
         <p className="hindaja">Kes on hindaja?</p>
 
         <div className="button-container">
-          <button className="button" onClick={() => handleNavigate(1, "Kalmer")}> 
+          <button className="button" onClick={() => handleNavigate(1, "Kalmer")}>
             Kalmer
           </button>
-          <button className="button" onClick={() => handleNavigate(2, "Marko")}> 
+          <button className="button" onClick={() => handleNavigate(2, "Marko")}>
             Marko
           </button>
         </div>

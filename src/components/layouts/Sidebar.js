@@ -26,7 +26,7 @@ function Sidebar({ onSelectTeam, grader }) {
 
   return (
     <div className="sidebar">
-      <h2>Select a Team</h2>
+      <h2>Võistlejad</h2>
       {loading ? (
         <div className="loading-container">
           <LoadingSpinner />
