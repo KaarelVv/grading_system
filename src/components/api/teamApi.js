@@ -1,6 +1,6 @@
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_SCRIPT_URL;
 
-// Fetch team data for a specific grader
+// ✅ Fetch team data for a specific grader
 export async function fetchTeamData(grader) {
   try {
     const response = await fetch(`${API_URL}?getTeams=true&Grader=${grader}`);
@@ -20,7 +20,7 @@ export async function fetchTeamData(grader) {
   }
 }
 
-// Update team scores
+// ✅ Update team scores
 export async function updateTeamScore(grader, teamName, formData) {
   const queryParams = new URLSearchParams({
     update: "true",

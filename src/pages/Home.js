@@ -12,6 +12,7 @@ const Home = () => {
 
   return (
     <div className="Home">
+       <div className="transparent-container">
       <div className="content">
         <h1 className="title">KÜBERKÜPSETUS "OMLETT"</h1>
         <p className="aasta">2025</p>
@@ -29,6 +30,7 @@ const Home = () => {
         <p className="tekst1">Sellel leheküljel saad hinnata küberküpsetusele "Omlett" esitatud töid</p>
         <hr />
         <p className="tekst2">Sinu abimees tööde hindamisel</p>
+      </div>
       </div>
     </div>
   );

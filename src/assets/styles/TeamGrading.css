@@ -1,58 +1,148 @@
 .team-grading-container {
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-  display: flex; /* Fixed typo */
+  max-width: 90vw; /* Makes it more responsive */
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #000022;
+  padding: clamp(10px, 3vw, 20px); /* Scales padding dynamically */
 }
 
+/* ✅ Categories now appear in a single column */
 .categories-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  flex-direction: column; /* Stack categories vertically */
+  gap: clamp(10px, 2vw, 20px); /* Dynamic spacing */
   justify-content: center;
+  align-items: center; /* Ensures center alignment */
+  width: 100%;
 }
 
-.category-column {
-  flex: 1;
+/* ✅ Ensure category boxes stay readable */
+.category-box {
+  width: 100%;
+  max-width: clamp(280px, 50vw, 500px); /* Scales width between 280px-500px */
   background: #de3c4b;
-  padding: 15px;
+  padding: clamp(10px, 2vw, 20px); /* Dynamic padding */
   border-radius: 8px;
   border: 1px solid #edf7f6;
   text-align: center;
+  display: flex;
+  flex-direction: column; /* Stack sliders and labels */
+  align-items: center;
 }
 
-/* Subcategory styling */
+/* ✅ Center sliders and labels in a column */
 .subcategory {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 15px;
+  align-items: center; /* Centers text & slider */
+  justify-content: center;
+  margin-bottom: clamp(10px, 2vw, 15px); /* Dynamic spacing */
+  width: 100%;
 }
 
+/* ✅ Centering the sliders and making them more readable */
 .subcategory input[type="range"] {
-  width: 100%;
-  height: 8px;
+  width: 80%;
+  height: clamp(6px, 1vw, 8px); /* Ensures slider height scales */
   appearance: none;
-  background: #d0d0d0;
   border-radius: 4px;
   outline: none;
+  background: #d0d0d0; /* Default track color */
+  transition: background 0.3s;
 }
 
+/* ✅ Blue-filled progress for Chrome, Safari, Edge */
+.subcategory input[type="range"]::-webkit-slider-runnable-track {
+  height: clamp(6px, 1vw, 8px);
+  border-radius: 4px;
+  background: linear-gradient(to right, #007BFF var(--progress), #d0d0d0 var(--progress));
+}
+
+/* ✅ Thumb styling for Chrome, Safari */
+.subcategory input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: clamp(14px, 2vw, 18px); /* Adjusts size dynamically */
+  height: clamp(14px, 2vw, 18px);
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #007BFF;
+  cursor: pointer;
+  margin-top: -4px;
+}
+
+/* ✅ Blue-filled progress for Firefox */
+.subcategory input[type="range"]::-moz-range-progress {
+  background: #007BFF;
+  height: clamp(6px, 1vw, 8px);
+  border-radius: 4px;
+}
+
+/* ✅ Track styling for Firefox */
+.subcategory input[type="range"]::-moz-range-track {
+  background: #d0d0d0;
+  height: clamp(6px, 1vw, 8px);
+  border-radius: 4px;
+}
+
+/* ✅ Track styling for IE */
+.subcategory input[type="range"]::-ms-fill-lower {
+  background: #007BFF;
+}
+
+.subcategory input[type="range"]::-ms-fill-upper {
+  background: #d0d0d0;
+}
+
+.subcategory label {
+  margin-top: clamp(5px, 1vw, 10px);
+  color: #edf7f6;
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ✅ Button container remains centered */
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: clamp(15px, 2vw, 25px);
+}
+
+/* ✅ Make the button responsive */
 .button {
   background-color: #de3c4b;
   color: white;
-  border: none;
+  border: 1px solid #edf7f6;
   border-radius: 25px;
-  padding: 10px 10px;
-  font-size: 16px;
+  padding: clamp(10px, 2vw, 15px) clamp(15px, 3vw, 25px);
+  font-size: clamp(14px, 2vw, 18px); /* Scales text size */
   cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.1s;
+  min-width: clamp(160px, 20vw, 250px);
+  max-width: 300px;
 }
 
-button:hover {
+/* Hover effect */
+.button:hover {
   background-color: #290a0d;
+  transform: scale(1.05);
+}
+
+/* ✅ Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+  .team-grading-container {
+    padding: 15px;
+  }
+
+  .category-box {
+    max-width: 90%;
+  }
+
+  .button {
+    width: 90%;
+  }
 }

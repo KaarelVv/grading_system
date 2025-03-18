@@ -1,14 +1,14 @@
 .grading-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh; /* Ensure it takes full screen height */
   background-color: #000022;
   color: #edf7f6;
-  margin-top: 10px;
-  margin-bottom: 10px;
   border-radius: 10px;
-
+  padding: 10px; /* Use padding instead of margin to avoid height overflow */
 }
+
+
 
 .top-bar {
   display: flex;
@@ -33,14 +33,21 @@
 
 .grading-section {
   flex-grow: 1;
+  display: flex; /* Ensures it fills the space */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centers grading content */
   padding: 20px;
-  text-align: center;
 }
 
+
 .team-grading-container {
-  max-width: 600px; /* Adjust width as needed */
+  max-width: 600px;
   width: 100%;
+  background-color: #000022; /* Ensures consistency */
+  padding: 20px;
 }
+
 
 /* Reusable Button Styles */
 .button {
@@ -49,7 +56,7 @@
   border: none;
   border-radius: 25px;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 36px;
   cursor: pointer;
   margin-top: 20px;
   transition: background-color 0.3s;

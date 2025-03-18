@@ -88,8 +88,10 @@ function TeamGrading({ teamName, grader }) {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div>
+        <div className="grading-content"> {/* ✅ Wrap sliders and button inside one container */}
           <p>Kohanda slaiderit punktide sisestamiseks</p>
+
+          {/* ✅ Categories are now stacked vertically */}
           <div className="categories-container">
             {Object.entries(categoriesEST).map(([categoryName, subcategories], index) => (
               <div key={index} className="category-box">
@@ -101,7 +103,13 @@ function TeamGrading({ teamName, grader }) {
                       min="0"
                       max="11"
                       value={formData[subcategory] || 0}
-                      onChange={(e) => setFormData({ ...formData, [subcategory]: Number(e.target.value) })}
+                      onChange={(e) => {
+                        const value = Number(e.target.value);
+                        setFormData({ ...formData, [subcategory]: value });
+
+                        // ✅ Dynamically update CSS variable for progress fill
+                        e.target.style.setProperty("--progress", `${(value / 11) * 100}%`);
+                      }}
                     />
                     <label>{translatedSubcategories[subcategory] || subcategory}: {formData[subcategory]}</label>
                   </div>
@@ -110,13 +118,18 @@ function TeamGrading({ teamName, grader }) {
             ))}
           </div>
 
-          <button className={`button ${submitting ? "submitting" : ""}`} onClick={handleSubmit} disabled={submitting}>
-            {submitting ? <LoadingSpinner /> : "Kinnita hinded"}
-          </button>
+          {/* ✅ Button stays inside the container and centered */}
+          <div className="button-container">
+            <button className={`button ${submitting ? "submitting" : ""}`} onClick={handleSubmit} disabled={submitting}>
+              {submitting ? <LoadingSpinner /> : "Kinnita hinded"}
+            </button>
+          </div>
         </div>
       )}
     </div>
   );
+
+
 }
 
 export default TeamGrading;
