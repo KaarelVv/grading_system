@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Sidebar from "../components/layouts/Sidebar";
-import TeamGrading from "../UI/TeamGrading";
+import Sidebar from "../components/Sidebar";
+import TeamGrading from "../components/TeamGrading";
 import "../assets/styles/Grading.css";
 
 const Grading = () => {

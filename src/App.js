@@ -3,7 +3,8 @@ import Home from "./pages/Home";
 import Grading from "./pages/Grading";
 import Result from "./pages/Result";
 import "./assets/styles/App.css";
-import "./assets/styles/Button.css"
+import "./assets/styles/Button.css";
+
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchMergedTeamData } from "../components/api/teamApi";
-import LoadingSpinner from "../UI/LoadingSpinner";
+import { fetchMergedTeamData } from "../services/api/teamService";
+import LoadingSpinner from "../components/LoadingSpinner";
 import "../assets/styles/Result.css";
 
 const categoriesEST = {

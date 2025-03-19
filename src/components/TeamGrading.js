@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchTeamData, updateTeamScore } from "../components/api/teamApi";
+import { fetchTeamData, updateTeamScore } from "../services/api/teamService";
 import LoadingSpinner from "./LoadingSpinner";
 import "../assets/styles/TeamGrading.css";
 

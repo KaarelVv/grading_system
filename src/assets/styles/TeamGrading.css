@@ -1,12 +1,13 @@
 .team-grading-container {
-  max-width: 90vw; /* Makes it more responsive */
+  max-width: 100%; /* ✅ Ensure it never overflows */
   width: 100%;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: rgb(0, 0, 34);
-  padding: clamp(10px, 3vw, 20px); /* Scales padding dynamically */
+  padding: clamp(10px, 3vw, 20px);
+  box-sizing: border-box; /* ✅ Prevents padding from increasing the width */
 }
 .team-grading-container h1,
 .team-grading-container p {
@@ -35,7 +36,7 @@
 
 .category-box {
   width: 100%;
-  max-width: clamp(280px, 50vw, 500px); /* Scales width between 280px-500px */
+  max-width: clamp(250px, 90vw, 500px); /* Scales width between 280px-500px */
   background: #de3c4b;
   padding: clamp(10px, 2vw, 20px); /* Dynamic padding */
   border-radius: 8px;
@@ -122,6 +123,7 @@
 .button-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: clamp(15px, 2vw, 25px);
 }
 

@@ -1,45 +1,105 @@
+/* ✅ Main Container */
 .grading-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure it takes full screen height */
+  min-height: 100vh;
+  /* Ensures full screen height */
   background-color: #000022;
   color: #edf7f6;
   border-radius: 10px;
-  padding: 10px; /* Use padding instead of margin to avoid height overflow */
+  padding: 10px;
 }
 
+/* ✅ Top Bar */
 .top-bar {
   display: flex;
-  justify-content: space-between; /* Ensures space between elements */
-  align-items: center; /* Align items in a single row */
+  justify-content: space-between;
+  /* Ensures space between elements */
+  align-items: center;
+  /* Aligns items in a single row */
   padding: 15px 20px;
   background-color: #000022;
   border-bottom: 1px solid #ddd;
-  gap: 10px; /* Optional: Adds space between elements */
+  gap: 10px;
+  flex-wrap: wrap;
+  /* ✅ Allows wrapping on small screens */
 }
 
+/* ✅ Layout: Sidebar & TeamGrading */
 .grading-layout {
   display: flex;
   flex: 1;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
+}
+
+/* ✅ Sidebar */
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
 }
 
 .grading-section {
-  flex-grow: 1;
-  display: flex; /* Ensures it fills the space */
+  width: 100%;
+  max-width: 600px;
+  /* ✅ Keeps it within a reasonable size */
+  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Centers grading content */
+  justify-content: center;
   padding: 20px;
+  box-sizing: border-box;
 }
 
+
+/* ✅ Team Grading Container */
 .team-grading-container {
   max-width: 600px;
   width: 100%;
-  background-color: #000022; /* Ensures consistency */
+  background-color: #000022;
   padding: 20px;
 }
 
-/* Popup Alert */
+/* ✅ Responsive: Switch to Column Layout for Small Screens */
+@media (max-width: 768px) {
+  .grading-layout {
+    flex-direction: column;
+    /* ✅ Stack sidebar and grading section */
+    align-items: center;
+    gap: 15px;
+  }
+
+  .sidebar {
+    width: 100%;
+    /* ✅ Sidebar takes full width */
+    max-width: 300px;
+  }
+
+  .grading-section {
+    width: 100%;
+    /* ✅ Grading section takes full width */
+  }
+
+  .top-bar {
+    flex-direction: column;
+    /* ✅ Stack buttons and title */
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .top-bar .button {
+    width: 100%;
+    max-width: 200px;
+    /* Keeps buttons a reasonable width */
+    margin-top: 10px;
+  }
+}
+
+/* ✅ Popup Alert */
 .popup-alert {
   position: fixed;
   top: 10px;
@@ -55,8 +115,22 @@
 }
 
 @keyframes fadeInOut {
-  0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-  10% { opacity: 1; transform: translateX(-50%) translateY(0); }
-  90% { opacity: 1; }
-  100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+
+  10% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
 }

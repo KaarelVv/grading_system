@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { fetchTeamData } from "../api/teamApi";
-import LoadingSpinner from "../../UI/LoadingSpinner";
-import "../../assets/styles/Sidebar.css";
+import { fetchTeamData } from "../services/api/teamService";
+import LoadingSpinner from "./LoadingSpinner";
+import "../assets/styles/Sidebar.css";
 
 function Sidebar({ onSelectTeam, grader }) {
   const [teams, setTeams] = useState([]);
