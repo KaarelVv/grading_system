@@ -25,15 +25,10 @@ const Grading = () => {
   return (
     <div className="grading-container">
       <div className="top-bar">
-        <div className="nav-buttons">
-          <button className="results-button" onClick={() => navigate("/")}>Pealehele</button>
-        </div>
+        <button className="button" onClick={() => navigate("/")}>Pealehele</button>
         <h2>Hindaja {grader}: {graderName}</h2>
-        <button className="results-button" onClick={() => navigate("/results")}>
-          Vaata tulemusi
-        </button>
+        <button className="button" onClick={() => navigate("/results")}>Vaata tulemusi</button>
       </div>
-
       <div className="grading-layout">
         <Sidebar onSelectTeam={setSelectedTeam} grader={grader} />
         <div className="grading-section">

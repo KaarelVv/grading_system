@@ -5,21 +5,34 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #000022;
+  background-color: rgb(0, 0, 34);
   padding: clamp(10px, 3vw, 20px); /* Scales padding dynamically */
 }
+.team-grading-container h1,
+.team-grading-container p {
+  margin: 10px; 
+  padding: 0; 
+ }
 
-/* ✅ Categories now appear in a single column */
+/* Categories now appear in a single column */
 .categories-container {
   display: flex;
-  flex-direction: column; /* Stack categories vertically */
-  gap: clamp(10px, 2vw, 20px); /* Dynamic spacing */
+  flex-direction: column;
+  gap: clamp(10px, 2vw, 20px);
   justify-content: center;
-  align-items: center; /* Ensures center alignment */
+  align-items: center;
+  
+}
+.grading-content {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* ✅ Ensures proper vertical alignment */
+  margin: 0;
+  padding: 0;
 }
 
-/* ✅ Ensure category boxes stay readable */
 .category-box {
   width: 100%;
   max-width: clamp(280px, 50vw, 500px); /* Scales width between 280px-500px */
@@ -33,7 +46,7 @@
   align-items: center;
 }
 
-/* ✅ Center sliders and labels in a column */
+/* Center sliders and labels in a column */
 .subcategory {
   display: flex;
   flex-direction: column;
@@ -43,7 +56,7 @@
   width: 100%;
 }
 
-/* ✅ Centering the sliders and making them more readable */
+/* Centering the sliders and making them more readable */
 .subcategory input[type="range"] {
   width: 80%;
   height: clamp(6px, 1vw, 8px); /* Ensures slider height scales */
@@ -52,16 +65,17 @@
   outline: none;
   background: #d0d0d0; /* Default track color */
   transition: background 0.3s;
+  cursor: pointer;
 }
 
-/* ✅ Blue-filled progress for Chrome, Safari, Edge */
+/* Blue-filled progress for Chrome, Safari, Edge */
 .subcategory input[type="range"]::-webkit-slider-runnable-track {
   height: clamp(6px, 1vw, 8px);
   border-radius: 4px;
   background: linear-gradient(to right, #007BFF var(--progress), #d0d0d0 var(--progress));
 }
 
-/* ✅ Thumb styling for Chrome, Safari */
+/* Thumb styling for Chrome, Safari */
 .subcategory input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: clamp(14px, 2vw, 18px); /* Adjusts size dynamically */
@@ -73,25 +87,26 @@
   margin-top: -4px;
 }
 
-/* ✅ Blue-filled progress for Firefox */
+/* Blue-filled progress for Firefox */
 .subcategory input[type="range"]::-moz-range-progress {
   background: #007BFF;
   height: clamp(6px, 1vw, 8px);
   border-radius: 4px;
 }
 
-/* ✅ Track styling for Firefox */
+/* Track styling for Firefox */
 .subcategory input[type="range"]::-moz-range-track {
   background: #d0d0d0;
   height: clamp(6px, 1vw, 8px);
   border-radius: 4px;
 }
 
-/* ✅ Track styling for IE */
+/* Track styling for IE */
 .subcategory input[type="range"]::-ms-fill-lower {
   background: #007BFF;
 }
 
+/* Track styling for IE */
 .subcategory input[type="range"]::-ms-fill-upper {
   background: #d0d0d0;
 }
@@ -104,35 +119,12 @@
   text-align: center;
 }
 
-/* ✅ Button container remains centered */
 .button-container {
   display: flex;
   justify-content: center;
-  width: 100%;
   margin-top: clamp(15px, 2vw, 25px);
 }
 
-/* ✅ Make the button responsive */
-.button {
-  background-color: #de3c4b;
-  color: white;
-  border: 1px solid #edf7f6;
-  border-radius: 25px;
-  padding: clamp(10px, 2vw, 15px) clamp(15px, 3vw, 25px);
-  font-size: clamp(14px, 2vw, 18px); /* Scales text size */
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.1s;
-  min-width: clamp(160px, 20vw, 250px);
-  max-width: 300px;
-}
-
-/* Hover effect */
-.button:hover {
-  background-color: #290a0d;
-  transform: scale(1.05);
-}
-
-/* ✅ Responsive adjustments for smaller screens */
 @media (max-width: 600px) {
   .team-grading-container {
     padding: 15px;

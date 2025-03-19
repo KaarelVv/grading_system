@@ -84,14 +84,12 @@ function TeamGrading({ teamName, grader }) {
     <div className="team-grading-container">
       {alertMessage && <div className="popup-alert">{alertMessage}</div>}
       <h1>{teamName}</h1>
-
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="grading-content"> {/* ✅ Wrap sliders and button inside one container */}
-          <p>Kohanda slaiderit punktide sisestamiseks</p>
+        <div className="grading-content">
+          <h4>Kohanda slaiderit punktide sisestamiseks</h4>
 
-          {/* ✅ Categories are now stacked vertically */}
           <div className="categories-container">
             {Object.entries(categoriesEST).map(([categoryName, subcategories], index) => (
               <div key={index} className="category-box">
@@ -107,7 +105,6 @@ function TeamGrading({ teamName, grader }) {
                         const value = Number(e.target.value);
                         setFormData({ ...formData, [subcategory]: value });
 
-                        // ✅ Dynamically update CSS variable for progress fill
                         e.target.style.setProperty("--progress", `${(value / 11) * 100}%`);
                       }}
                     />
@@ -117,8 +114,6 @@ function TeamGrading({ teamName, grader }) {
               </div>
             ))}
           </div>
-
-          {/* ✅ Button stays inside the container and centered */}
           <div className="button-container">
             <button className={`button ${submitting ? "submitting" : ""}`} onClick={handleSubmit} disabled={submitting}>
               {submitting ? <LoadingSpinner /> : "Kinnita hinded"}
@@ -128,8 +123,6 @@ function TeamGrading({ teamName, grader }) {
       )}
     </div>
   );
-
-
 }
 
 export default TeamGrading;

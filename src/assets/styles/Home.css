@@ -1,4 +1,5 @@
-.Home {
+
+.home {
     background: linear-gradient(
         rgba(0, 0, 34, 0.1),
         rgba(0, 0, 0, 0.1)
@@ -18,8 +19,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: 1200px;
+    
     padding: 0 20px;
 }
 
@@ -41,51 +41,20 @@
     font-size: clamp(16px, 2vw, 22px);
     font-weight: 900;
     margin-bottom: 10px;
+    font-size: clamp(24px, 3.5vw, 32px);
 }
 
 /* Buttons container - wraps on smaller screens */
 .button-container {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* Allows buttons to stack on smaller screens */
-    gap: 20px; /* Reduced spacing */
-    margin-bottom: 30px;
-    width: 100%;
-}
-button {
-    all: unset; 
-}
-.button {
-    width: clamp(160px, 22vw, 240px); /* Slightly smaller width */
-    height: clamp(50px, 8vw, 80px);  /* Slightly smaller height */
-    border-radius: 20px;
-    background: rgba(222, 60, 75, 0.9); /* Semi-transparent red */
-    color: #EDF7F6;
-    font-family: Mulish, sans-serif;
-    font-size: clamp(24px, 5vw, 40px); /* Scalable but smaller */
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.1s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 10px 20px;
-    backdrop-filter: blur(5px); /* Adds a subtle blur effect */
-}
-
-/* Ensures no global styles override the button */
-
-
-
-.button:hover {
-    background-color: rgba(0, 0, 34, 0.8); /* Darker blue on hover */
-    transform: scale(1.05); /* Slight animation effect */
+    justify-content: center;  /* Centers buttons */
+    flex-wrap: wrap;          /* Allows wrapping on small screens */
+    gap: 20px;                /* Keeps even spacing between buttons */
+    padding: 10px;
 }
 
 /* Large description text */
-.tekst1 {
+.text1 {
     color: #EDF7F6;
     text-align: center;
     font-family: Mulish;
@@ -94,7 +63,15 @@ button {
     margin: 20px 0;
     max-width: 1200px;
 }
-
+.text2 {
+    color: #EDF7F6;
+    text-align: center;
+    font-family: Mulish;
+    font-size: clamp(18px, 3vw, 34px);
+    font-style: italic;
+    font-weight: 200;
+    margin-top: 20px;
+}
 /* Styled horizontal rule */
 hr {
     width: 100%;
@@ -106,20 +83,9 @@ hr {
     margin: 25px 0;
 }
 
-/* Smaller italic text */
-.tekst2 {
-    color: #EDF7F6;
-    text-align: center;
-    font-family: Mulish;
-    font-size: clamp(18px, 3vw, 34px);
-    font-style: italic;
-    font-weight: 200;
-    margin-top: 20px;
-}
-
 /* Transparent background for better text contrast */
 .transparent-container {
-    background: rgba(0, 0, 34, 0.6); /* Dark blue transparent layer */
+    background: rgba(0, 0, 0, 0.5); 
     padding: 20px;
     border-radius: 15px;
 }

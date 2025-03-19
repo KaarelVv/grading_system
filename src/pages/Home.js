@@ -11,7 +11,7 @@ const Home = () => {
   };
 
   return (
-    <div className="Home">
+    <div className="home">
        <div className="transparent-container">
       <div className="content">
         <h1 className="title">KÜBERKÜPSETUS "OMLETT"</h1>
@@ -19,17 +19,17 @@ const Home = () => {
         <p className="hindaja">Kes on hindaja?</p>
 
         <div className="button-container">
-          <button className="button" onClick={() => handleNavigate(1, "Kalmer")}>
+          <button className="button button--large" onClick={() => handleNavigate(1, "Kalmer")}>
             Kalmer
           </button>
-          <button className="button" onClick={() => handleNavigate(2, "Marko")}>
+          <button className="button button--large" onClick={() => handleNavigate(2, "Marko")}>
             Marko
           </button>
         </div>
 
-        <p className="tekst1">Sellel leheküljel saad hinnata küberküpsetusele "Omlett" esitatud töid</p>
+        <p className="text1">Sellel leheküljel saad hinnata küberküpsetuse "Omlett" esitatud töid</p>
         <hr />
-        <p className="tekst2">Sinu abimees tööde hindamisel</p>
+        <p className="text2">Sinu abimees tööde hindamisel</p>
       </div>
       </div>
     </div>

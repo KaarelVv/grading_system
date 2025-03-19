@@ -36,7 +36,7 @@ const Result = () => {
     const highestTeams = {};
 
     categories.forEach(category => {
-      let maxScore = Math.max(...teams.map(team => 
+      let maxScore = Math.max(...teams.map(team =>
         Object.values(team[category]).reduce((sum, value) => sum + value, 0)
       ));
 
@@ -67,8 +67,8 @@ const Result = () => {
     <div className="container">
       <h2 className="text-center">Tulemus</h2>
       <div className="nav-buttons">
-        <button className="results-button" onClick={() => navigate("/")}>Pealeht</button>
-        <button className="results-button" onClick={() => navigate("/grading")}>Hindamine</button>
+        <button className="button" onClick={() => navigate("/")}>Pealeht</button>
+        <button className="button" onClick={() => navigate("/grading")}>Hindamine</button>
       </div>
       <h3>Parim skoor:</h3>
       <ul className="list-group">
@@ -76,7 +76,6 @@ const Result = () => {
           <li className="list-group-item" key={team.Team}>{team.Team} - {team.Total} punkti</li>
         ))}
       </ul>
-
       <div className="highest-category-section">
         <h3>Parim kategooria:</h3>
         {Object.entries(highestCategoryTeams).map(([category, teams]) => (

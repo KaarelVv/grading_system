@@ -1,0 +1,24 @@
+/* Base Button Style */
+.button {
+    background-color: #de3c4b;
+    color: white;
+    border: 1px solid #edf7f6;
+    border-radius: 25px;
+    padding: clamp(10px, 2vw, 15px) clamp(15px, 3vw, 25px);
+    font-size: clamp(14px, 2vw, 18px);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    width: clamp(160px, 22vw, 240px);
+    height: clamp(50px, 8vw, 80px);
+    max-width: 300px;
+    text-align: center;
+    display: inline-block;
+}
+
+/* Modifier: Larger Button */
+.button--large {
+    font-size: clamp(18px, 2.5vw, 36px);
+    padding: clamp(15px, 3vw, 20px) clamp(20px, 4vw, 30px);
+    width: clamp(200px, 25vw, 300px);
+    height: clamp(60px, 10vw, 100px);
+}
