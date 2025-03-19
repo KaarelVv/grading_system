@@ -10,15 +10,42 @@ const categoriesEST = {
 };
 
 const translatedSubcategories = {
-  VisualAttractiveness: "Visuaalne atraktiivsus",
-  Interactivity: "Interaktiivsus",
-  Animations: "Animatsioonid",
-  CybersecurityRelevance: "Seotus küberturbega",
-  FactAccuracy: "Faktide täpsus",
-  LearningValue: "Õpitav väärtus",
-  BugFreePerformance: "Vigade puudumine",
-  Documentation: "Dokumentatsioon",
-  CodeStructure: "Koodi struktuur"
+  VisualAttractiveness: {
+    title: "Visuaalne atraktiivsus",
+    description: "Kas disain on professionaalne, ühtne ja esteetiliselt meeldiv?"
+  },
+  Interactivity: {
+    title: "Interaktiivsus ja intuitiivsus",
+    description: "Kas funktsioonid on interaktiivsed? Kas mäng on kaasahaarav ja õpetuseta mängitav?"
+  },
+  Animations: {
+    title: "Animatsioonid ja illustratsioonid",
+    description: "Kas on kasutatud huvitavaid, asjakohaseid, isikupäraseid animatsioone ja illustratsioone?"
+  },
+  CybersecurityRelevance: {
+    title: "Seotus küberturbega",
+    description: "Kas mängu sisu on teemakohane ja küberjulgeolekuga seotud?"
+  },
+  FactAccuracy: {
+    title: "Faktide täpsus ja usaldusväärsus",
+    description: "Kas info põhineb usaldusväärsetel allikatel ja on faktitäpne?"
+  },
+  LearningValue: {
+    title: "Õpitav väärtus",
+    description: "Kas mäng annab mängijale kasulikke teadmisi?"
+  },
+  BugFreePerformance: {
+    title: "Vigade puudumine ja jõudlus",
+    description: "Kas mäng reageerib loogiliselt? Laeb viivitusteta? Kommunikeerib vigase sisendi veateated?"
+  },
+  Documentation: {
+    title: "Dokumentatsioon ja help",
+    description: "Kas on kirjutatud korralik README ja vormistatud kasutusjuhend?"
+  },
+  CodeStructure: {
+    title: "Koodi struktuur",
+    description: " Kas kood on hästi organiseeritud, optimeeritud, kommenteeritud ja arusaadav? DRY?"
+  }
 };
 
 function TeamGrading({ teamName, grader }) {
@@ -72,23 +99,28 @@ function TeamGrading({ teamName, grader }) {
     setSubmitting(true);
     try {
       const result = await updateTeamScore(grader, teamName, formData);
-      setAlertMessage(result);
-      setTimeout(() => setAlertMessage(""), 3000);
+
+      if (result?.success) {
+        setAlertMessage(`Salvestamine ei õnnestunud.`);
+      } else {
+        setAlertMessage( `${teamName} Hinded edukalt salvestatud!`);
+      }
     } catch (error) {
-      console.error("Error updating scores:", error);
+      setAlertMessage(`Viga hindamise salvestamisel: ${error.message}`);
     }
+
+    setTimeout(() => setAlertMessage(""), 3000);
     setSubmitting(false);
   };
 
   return (
     <div className="team-grading-container">
       {alertMessage && <div className="popup-alert">{alertMessage}</div>}
-      <h1>{teamName}</h1>
       {loading ? (
         <LoadingSpinner />
       ) : (
         <div className="grading-content">
-          <h4>Kohanda slaiderit punktide sisestamiseks</h4>
+          <h4>Kohanda slaiderit punktide sisestamiseks. Max 11p</h4>
 
           <div className="categories-container">
             {Object.entries(categoriesEST).map(([categoryName, subcategories], index) => (
@@ -104,17 +136,22 @@ function TeamGrading({ teamName, grader }) {
                       onChange={(e) => {
                         const value = Number(e.target.value);
                         setFormData({ ...formData, [subcategory]: value });
-
                         e.target.style.setProperty("--progress", `${(value / 11) * 100}%`);
                       }}
                     />
-                    <label>{translatedSubcategories[subcategory] || subcategory}: {formData[subcategory]}</label>
+                    <label>
+                      <strong>{translatedSubcategories[subcategory]?.title || subcategory}:</strong> {formData[subcategory]}
+                    </label>
+                    <p className="subcategory-description">
+                      {translatedSubcategories[subcategory]?.description}
+                    </p>
                   </div>
                 ))}
               </div>
             ))}
           </div>
-          <div className="button-container">
+          <h4>Enne tiimi vahetust palun salvesta tulemus!</h4>
+          <div className="button-container button-submit">
             <button className={`button ${submitting ? "submitting" : ""}`} onClick={handleSubmit} disabled={submitting}>
               {submitting ? <LoadingSpinner /> : "Kinnita hinded"}
             </button>

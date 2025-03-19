@@ -12,7 +12,7 @@ export function mergeTeamScores(data1, data2) {
 
       if (!teamMap.has(team.Team)) {
           teamMap.set(team.Team, { ...team });
-          //console.log(`✅ Added new team: ${team.Team}`, team);
+          //console.log(`Added new team: ${team.Team}`, team);
       } else {
           const existing = teamMap.get(team.Team);
 

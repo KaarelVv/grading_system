@@ -1,7 +1,7 @@
 .container {
   max-width: 1000px;
-  margin: 40px auto;
-  padding: 20px;
+  margin: 0 auto;
+  padding:40px 20px;
   background-color: #000022;
   color: #edf7f6;
   font-family: Mulish, sans-serif;
@@ -13,7 +13,6 @@
   color: #edf7f6;
 }
 
-/* Heading styling */
 h2 {
   font-size: 32px;
   font-weight: 900;
