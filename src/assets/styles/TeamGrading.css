@@ -1,0 +1,143 @@
+.team-grading-container {
+  max-width: 100%; /* Ensure it never overflows */
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(0, 0, 34);
+  padding: clamp(10px, 3vw, 20px);
+  box-sizing: border-box;
+}
+
+.team-grading-container h1,
+.team-grading-container p {
+  margin: 10px;
+  padding: 0;
+}
+
+.categories-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2vw, 20px);
+  justify-content: center;
+  align-items: center;
+
+}
+
+.grading-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.category-box {
+  width: 100%;
+  max-width: clamp(250px, 90vw, 500px); /* Scales width between 280px-500px */
+  background: #de3c4b;
+  padding: clamp(5px, 2vw, 10px); /* Dynamic padding */
+  border-radius: 8px;
+  border: 1px solid #edf7f6;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Center sliders and labels in a column */
+.subcategory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(10px, 2vw, 15px);/* Dynamic spacing */
+  width: 100%;
+}
+
+.subcategory-description {
+  font-size: 0.9rem;
+  color: #ffffff;
+  margin-top: 5px;
+}
+
+/* Centering the sliders and making them more readable */
+.subcategory input[type="range"] {
+  width: 80%;
+  height: clamp(6px, 1vw, 8px); 
+  appearance: none;
+  border-radius: 4px;
+  outline: none;
+  background: #d0d0d0; /* Default track color */
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
+/* Blue-filled progress for Chrome, Safari, Edge */
+.subcategory input[type="range"]::-webkit-slider-runnable-track {
+  height: clamp(6px, 1vw, 8px);
+  border-radius: 4px;
+  background: linear-gradient(to right, #007BFF var(--progress), #d0d0d0 var(--progress));
+}
+
+/* Thumb styling for Chrome, Safari */
+.subcategory input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: clamp(14px, 2vw, 18px);
+  /* Adjusts size dynamically */
+  height: clamp(14px, 2vw, 18px);
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #007BFF;
+  cursor: pointer;
+  margin-top: -4px;
+}
+
+/* Blue-filled progress for Firefox */
+.subcategory input[type="range"]::-moz-range-progress {
+  background: #007BFF;
+  height: clamp(6px, 1vw, 8px);
+  border-radius: 4px;
+}
+
+/* Track styling for Firefox */
+.subcategory input[type="range"]::-moz-range-track {
+  background: #d0d0d0;
+  height: clamp(6px, 1vw, 8px);
+  border-radius: 4px;
+}
+
+/* Track styling for IE */
+.subcategory input[type="range"]::-ms-fill-lower {
+  background: #007BFF;
+}
+
+/* Track styling for IE */
+.subcategory input[type="range"]::-ms-fill-upper {
+  background: #d0d0d0;
+}
+
+.subcategory label {
+  margin-top: clamp(5px, 1vw, 10px);
+  color: #edf7f6;
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 600;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .team-grading-container {
+    padding: 15px;
+  }
+
+  .category-box {
+    max-width: 90%;
+  }
+
+  .button {
+    width: 90%;
+  }
+}

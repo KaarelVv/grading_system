@@ -1,0 +1,91 @@
+
+.home {
+    background: linear-gradient(
+        rgba(0, 0, 34, 0.1),
+        rgba(0, 0, 0, 0.1)
+    );
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Center content properly */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    padding: 0 20px;
+}
+
+/* Responsive title */
+.title {
+    color: #EDF7F6;
+    text-align: center;
+    font-family: Mulish;
+    font-size: clamp(40px, 8vw, 75px);
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+/* Smaller subtitles */
+.aasta, .hindaja {
+    color: #EDF7F6;
+    text-align: center;
+    font-family: Mulish;
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 900;
+    margin-bottom: 10px;
+    font-size: clamp(24px, 3.5vw, 32px);
+}
+
+/* Buttons container - wraps on smaller screens */
+.button-container {
+    display: flex;
+    justify-content: center;  /* Centers buttons */
+    flex-wrap: wrap;          /* Allows wrapping on small screens */
+    gap: 20px;                /* Keeps even spacing between buttons */
+    padding: 10px;
+}
+
+/* Large description text */
+.text1 {
+    color: #EDF7F6;
+    text-align: center;
+    font-family: Mulish;
+    font-size: clamp(24px, 3.5vw, 42px);
+    font-weight: 500;
+    margin: 20px 0;
+    max-width: 1200px;
+}
+.text2 {
+    color: #EDF7F6;
+    text-align: center;
+    font-family: Mulish;
+    font-size: clamp(18px, 3vw, 34px);
+    font-style: italic;
+    font-weight: 200;
+    margin-top: 20px;
+}
+/* Styled horizontal rule */
+hr {
+    width: 100%;
+    max-width: 1200px;
+    border-radius: 5px;
+    background: #DE3C4B;
+    height: 4px;
+    border: none;
+    margin: 25px 0;
+}
+
+/* Transparent background for better text contrast */
+.transparent-container {
+    background: rgba(0, 0, 0, 0.5); 
+    padding: 20px;
+    border-radius: 15px;
+}

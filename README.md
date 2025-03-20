@@ -1,73 +1,79 @@
-# Getting Started with Create React App
+function doGet(e) {
+  const spreadsheet = SpreadsheetApp.openByUrl("SHEET_URL");
+  
+  const sheet1 = spreadsheet.getSheetByName("Sheet1"); // Grader 1
+  const sheet2 = spreadsheet.getSheetByName("Sheet2"); // Grader 2
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  if (!e || !e.parameter) {
+    return ContentService.createTextOutput("Missing parameters").setMimeType(ContentService.MimeType.TEXT);
+  }
 
-## Available Scripts
+  let grader = e.parameter.Grader; // Get Grader from URL (1 or 2)
+  let sheet = grader === "1" ? sheet1 : sheet2; // Select the correct sheet
 
-In the project directory, you can run:
+  // ✅ Fetching team data
+  if (e.parameter.getTeams) {
+    let data = sheet.getDataRange().getValues();
+    data.shift(); // Remove first header row
+    data.shift(); // Remove second header row
 
-### `npm start`
+    let result = data.map(row => ({
+      Team: row[0],
+      UserExperienceDesign: { VisualAttractiveness: row[1] || 0, Interactivity: row[2] || 0, Animations: row[3] || 0 },
+      EducationalAccuracy: { CybersecurityRelevance: row[4] || 0, FactAccuracy: row[5] || 0, LearningValue: row[6] || 0 },
+      Functionality: { BugFreePerformance: row[7] || 0, Documentation: row[8] || 0, CodeStructure: row[9] || 0 },
+      Total: row[10] || 0
+    }));
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
+  }
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  // ✅ Updating a team's data
+  if (e.parameter.update) {
+    let team = e.parameter.Team;
 
-### `npm test`
+    let ua1 = parseInt(e.parameter.VisualAttractiveness, 10) || 0;
+    let ua2 = parseInt(e.parameter.Interactivity, 10) || 0;
+    let ua3 = parseInt(e.parameter.Animations, 10) || 0;
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    let ed1 = parseInt(e.parameter.CybersecurityRelevance, 10) || 0;
+    let ed2 = parseInt(e.parameter.FactAccuracy, 10) || 0;
+    let ed3 = parseInt(e.parameter.LearningValue, 10) || 0;
 
-### `npm run build`
+    let fn1 = parseInt(e.parameter.BugFreePerformance, 10) || 0;
+    let fn2 = parseInt(e.parameter.Documentation, 10) || 0;
+    let fn3 = parseInt(e.parameter.CodeStructure, 10) || 0;
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    let totalScore = ua1 + ua2 + ua3 + ed1 + ed2 + ed3 + fn1 + fn2 + fn3;
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    let range = sheet.getDataRange();
+    let values = range.getValues();
+    let teamFound = false;
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    for (let i = 1; i < values.length; i++) {
+      if (values[i][0] === team) {
+        sheet.getRange(i + 1, 2).setValue(ua1);
+        sheet.getRange(i + 1, 3).setValue(ua2);
+        sheet.getRange(i + 1, 4).setValue(ua3);
+        sheet.getRange(i + 1, 5).setValue(ed1);
+        sheet.getRange(i + 1, 6).setValue(ed2);
+        sheet.getRange(i + 1, 7).setValue(ed3);
+        sheet.getRange(i + 1, 8).setValue(fn1);
+        sheet.getRange(i + 1, 9).setValue(fn2);
+        sheet.getRange(i + 1, 10).setValue(fn3);
+        sheet.getRange(i + 1, 11).setValue(totalScore); // Update total
 
-### `npm run eject`
+        teamFound = true;
+        break;
+      }
+    }
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    if (!teamFound) {
+      return ContentService.createTextOutput("Team not found").setMimeType(ContentService.MimeType.TEXT);
+    }
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    return ContentService.createTextOutput(`Update successful for Grader ${grader}`).setMimeType(ContentService.MimeType.TEXT);
+  }
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-### How to use react bootstrap
-https://react-bootstrap.netlify.app/docs/getting-started/why-react-bootstrap
+  return ContentService.createTextOutput("Invalid request").setMimeType(ContentService.MimeType.TEXT);
+}

@@ -1,0 +1,132 @@
+.grading-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures full screen height */
+  background-color: #000022;
+  color: #edf7f6;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 1000px; /* Default width for large screens */
+  margin: 0 auto; /*  Center the container */
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #000022;
+  border-bottom: 1px solid #ddd;
+  gap: 10px;
+  flex-wrap: wrap; /* Allows wrapping on small screens */
+}
+
+/* Layout: Sidebar & TeamGrading */
+.grading-layout {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
+}
+
+
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.grading-section {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.team-grading-container {
+  max-width: 600px;
+  width: 100%;
+  background-color: #000022;
+  padding: 20px;
+}
+
+
+@media (max-width: 768px) {
+  .grading-container {
+    max-width: 600px; /* Reduce width for tablets */
+  }
+  
+  .grading-layout {
+    flex-direction: column; /* Stack sidebar and grading section */
+    align-items: center;
+    gap: 15px;
+  }
+
+  .sidebar {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .grading-section {
+    width: 100%;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .top-bar .button {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+  }
+}
+
+.popup-alert {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #de3c4b;
+  color: #fff;
+  padding: 15px 30px; 
+  border-radius: 8px;
+  border: solid 3px #fff;
+  font-weight: bold;
+  font-size: 1.2rem; 
+  z-index: 1000;
+  animation: fadeInOut 4s ease-in-out;
+
+  
+  box-shadow: 0 0 40px rgba(62, 168, 243, 0.8);
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
