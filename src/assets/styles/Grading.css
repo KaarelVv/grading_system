@@ -8,7 +8,7 @@
   padding: 10px;
   width: 100%;
   max-width: 1000px; /* Default width for large screens */
-  margin: 0 auto; /* Center the container */
+  margin: 0 auto; /*  Center the container */
 }
 
 .top-bar {
@@ -56,32 +56,29 @@
   padding: 20px;
 }
 
-/* ✅ Responsive: Switch to Column Layout for Small Screens */
+
 @media (max-width: 768px) {
   .grading-container {
     max-width: 600px; /* Reduce width for tablets */
   }
   
   .grading-layout {
-    flex-direction: column; /* ✅ Stack sidebar and grading section */
+    flex-direction: column; /* Stack sidebar and grading section */
     align-items: center;
     gap: 15px;
   }
 
   .sidebar {
     width: 100%;
-    /* ✅ Sidebar takes full width */
     max-width: 300px;
   }
 
   .grading-section {
     width: 100%;
-    /* ✅ Grading section takes full width */
   }
 
   .top-bar {
     flex-direction: column;
-    /* ✅ Stack buttons and title */
     align-items: center;
     text-align: center;
     gap: 10px;
@@ -90,12 +87,10 @@
   .top-bar .button {
     width: 100%;
     max-width: 200px;
-    /* Keeps buttons a reasonable width */
     margin-top: 10px;
   }
 }
 
-/* ✅ Popup Alert */
 .popup-alert {
   position: fixed;
   top: 10px;
@@ -103,30 +98,35 @@
   transform: translateX(-50%);
   background: #de3c4b;
   color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 15px 30px; 
+  border-radius: 8px;
+  border: solid 3px #fff;
   font-weight: bold;
+  font-size: 1.2rem; 
   z-index: 1000;
-  animation: fadeInOut 3s ease-in-out;
+  animation: fadeInOut 4s ease-in-out;
+
+  
+  box-shadow: 0 0 40px rgba(62, 168, 243, 0.8);
 }
 
 @keyframes fadeInOut {
   0% {
     opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
   }
 
   10% {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
   }
 
-  90% {
+  80% {
     opacity: 1;
   }
 
   100% {
     opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
   }
 }
+
+
+
